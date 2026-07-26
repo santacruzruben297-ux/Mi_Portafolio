@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechStore · Catálogo &amp; carrito</title>
+<meta name="description" content="TechStore — proyecto de e-commerce de Rubén Santa Cruz. Catálogo con filtros reales y carrito de compra funcional.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --alu:#EDEEF0;
+  --alu-deep:#E1E3E6;
+  --graphite:#1C1E22;
+  --graphite-soft:#55585F;
+  --green:#00A97E;
+  --amber:#D98200;
+  --line:#D5D7DB;
+  --white:#FFFFFF;
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{
+  margin:0; background:var(--alu); color:var(--graphite);
+  font-family:'Manrope',Arial,sans-serif; line-height:1.5;
+}
+h1,h2,h3{ font-family:'Space Grotesk',Arial,sans-serif; margin:0; font-weight:700; }
+p{ margin:0; color:var(--graphite-soft); }
+button{ font-family:inherit; cursor:pointer; }
+a{ color:inherit; text-decoration:none; }
+.mono{ font-family:'JetBrains Mono',monospace; }
+.wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{ outline:2px solid var(--green); outline-offset:2px; }
+
+/* -------- header -------- */
+.top{ position:sticky; top:0; z-index:30; background:var(--alu); border-bottom:1px solid var(--line); }
+.top-inner{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1120px; margin:0 auto; gap:20px; }
+.back-link{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--graphite-soft); white-space:nowrap; }
+.back-link:hover{ text-decoration:underline; }
+.brand{ font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:700; display:flex; align-items:center; gap:8px; }
+.brand .dot{ width:8px; height:8px; background:var(--green); border-radius:50%; display:inline-block; }
+.cart-btn{ position:relative; background:var(--graphite); color:var(--alu); border:none; padding:10px 16px; border-radius:8px; font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px; }
+.cart-count{ background:var(--green); color:#06231b; font-size:11px; font-weight:800; padding:1px 6px; border-radius:10px; }
+
+/* -------- hero -------- */
+.hero{ padding:52px 0 36px; }
+.hero .eyebrow{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--green); text-transform:uppercase; letter-spacing:.08em; }
+.hero h1{ font-size:clamp(30px,4.4vw,44px); margin-top:10px; max-width:16ch; }
+.hero p.lead{ max-width:56ch; margin-top:14px; font-size:15.5px; }
+
+/* -------- controles -------- */
+.controls{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; padding-bottom:28px; border-bottom:1px solid var(--line); margin-bottom:32px; }
+.search-box{ flex:1; min-width:200px; position:relative; }
+.search-box input{
+  width:100%; padding:11px 14px; border:1px solid var(--line); border-radius:8px; background:var(--white);
+  font-size:14px; font-family:'Manrope',sans-serif; color:var(--graphite);
+}
+.sort-select{ padding:11px 12px; border:1px solid var(--line); border-radius:8px; background:var(--white); font-size:13.5px; color:var(--graphite); }
+
+.switch-row{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:28px; }
+.switch{
+  display:flex; align-items:center; gap:9px; background:var(--white); border:1px solid var(--line);
+  border-radius:999px; padding:7px 8px 7px 14px; font-size:13px; font-weight:600; color:var(--graphite-soft);
+}
+.switch .track{ width:30px; height:16px; border-radius:20px; background:var(--line); position:relative; transition:background .18s ease; }
+.switch .track::after{ content:''; position:absolute; top:2px; left:2px; width:12px; height:12px; border-radius:50%; background:var(--white); transition:transform .18s ease; box-shadow:0 1px 2px rgba(0,0,0,.25); }
+.switch.is-active{ color:var(--graphite); }
+.switch.is-active .track{ background:var(--green); }
+.switch.is-active .track::after{ transform:translateX(14px); }
+
+/* -------- grid de productos -------- */
+.product-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:18px; padding-bottom:80px; }
+.card{ background:var(--white); border:1px solid var(--line); border-radius:14px; padding:18px; display:flex; flex-direction:column; gap:10px; position:relative; }
+.card .badge{ position:absolute; top:14px; right:14px; font-size:10.5px; font-weight:700; padding:3px 8px; border-radius:6px; text-transform:uppercase; letter-spacing:.03em; }
+.badge.nuevo{ background:#E4F3EC; color:var(--green); }
+.badge.oferta{ background:#FCEBD6; color:var(--amber); }
+.card .cat{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--graphite-soft); text-transform:uppercase; letter-spacing:.04em; }
+.card h3{ font-size:16px; margin-top:2px; }
+.card .spec{ font-size:12.5px; min-height:32px; }
+.card .price-row{ display:flex; align-items:baseline; justify-content:space-between; margin-top:auto; padding-top:8px; }
+.card .price{ font-family:'JetBrains Mono',monospace; font-size:16px; font-weight:700; }
+.add-cart-btn{ background:var(--graphite); color:var(--alu); border:none; padding:9px; border-radius:8px; font-size:12.5px; font-weight:700; width:100%; }
+.add-cart-btn.just-added{ background:var(--green); color:#06231b; }
+.no-results{ grid-column:1/-1; text-align:center; padding:60px 0; color:var(--graphite-soft); font-size:14px; }
+
+/* -------- carrito (drawer) -------- */
+.overlay{ position:fixed; inset:0; background:rgba(20,22,26,.4); opacity:0; pointer-events:none; transition:opacity .2s ease; z-index:40; }
+.overlay.is-open{ opacity:1; pointer-events:auto; }
+.drawer{
+  position:fixed; top:0; right:0; height:100%; width:min(400px,92vw); background:var(--white);
+  z-index:50; transform:translateX(100%); transition:transform .25s ease; display:flex; flex-direction:column;
+  box-shadow:-20px 0 40px rgba(0,0,0,.15);
+}
+.drawer.is-open{ transform:translateX(0); }
+.drawer-head{ display:flex; justify-content:space-between; align-items:center; padding:20px 22px; border-bottom:1px solid var(--line); }
+.drawer-head h3{ font-size:17px; }
+.close-btn{ background:none; border:none; font-size:22px; line-height:1; color:var(--graphite-soft); }
+.drawer-body{ flex:1; overflow-y:auto; padding:16px 22px; }
+.cart-empty{ text-align:center; color:var(--graphite-soft); font-size:13.5px; padding:60px 0; }
+.cart-line{ display:flex; gap:12px; padding:14px 0; border-bottom:1px solid var(--line); }
+.cart-line .info{ flex:1; }
+.cart-line h4{ font-family:'Manrope',sans-serif; font-size:13.5px; font-weight:700; margin:0; color:var(--graphite); }
+.cart-line .unit{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--graphite-soft); margin-top:2px; }
+.cart-line .qty-row{ display:flex; align-items:center; gap:8px; margin-top:8px; }
+.qty-btn{ width:22px; height:22px; border:1px solid var(--line); background:var(--white); border-radius:5px; font-size:13px; }
+.cart-line .line-total{ font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13.5px; }
+.remove-link{ background:none; border:none; font-size:11px; color:var(--amber); text-decoration:underline; margin-top:6px; padding:0; }
+.drawer-foot{ padding:18px 22px 22px; border-top:1px solid var(--line); }
+.ship-note{ font-size:12px; color:var(--graphite-soft); margin-bottom:10px; }
+.ship-bar{ height:5px; background:var(--alu-deep); border-radius:4px; overflow:hidden; margin-bottom:14px; }
+.ship-bar-fill{ height:100%; background:var(--green); width:0%; transition:width .25s ease; }
+.totals-row{ display:flex; justify-content:space-between; font-size:13.5px; margin-bottom:6px; color:var(--graphite-soft); }
+.totals-row.grand{ color:var(--graphite); font-weight:700; font-size:15.5px; margin-top:8px; }
+.checkout-btn{ width:100%; background:var(--graphite); color:var(--alu); border:none; padding:13px; border-radius:9px; font-weight:700; font-size:14px; margin-top:12px; }
+.checkout-btn:disabled{ opacity:.35; cursor:not-allowed; }
+.order-confirm{ text-align:center; padding:30px 4px; }
+.order-confirm .code{ font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:var(--green); margin:10px 0; }
+.new-cart-btn{ margin-top:16px; background:none; border:1px solid var(--line); padding:9px 16px; border-radius:8px; font-size:12.5px; }
+
+footer{ padding:30px 0; border-top:1px solid var(--line); text-align:center; font-size:12.5px; color:var(--graphite-soft); }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <a class="back-link" href="../../index.html">&larr; Volver al portafolio</a>
+    <div class="brand"><span class="dot"></span>TechStore</div>
+    <button class="cart-btn" type="button" id="cartOpenBtn">
+      Carrito <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Proyecto de Rubén Santa Cruz — E-commerce</span>
+    <h1>Tecnología organizada por cómo la usas, no solo por marca.</h1>
+    <p class="lead">Catálogo real: filtra por categoría, busca por nombre, ordena por precio y arma un carrito de verdad. Todo corre en tu navegador — sin backend, sin cobros reales.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="controls">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Buscar producto…">
+    </div>
+    <select class="sort-select" id="sortSelect">
+      <option value="relevancia">Ordenar: relevancia</option>
+      <option value="precio-asc">Precio: menor a mayor</option>
+      <option value="precio-desc">Precio: mayor a menor</option>
+      <option value="nombre">Nombre: A–Z</option>
+    </select>
+  </div>
+
+  <div class="switch-row" id="categorySwitches"></div>
+
+  <div class="product-grid" id="productGrid"></div>
+</section>
+
+<footer>
+  <div class="wrap">TechStore — proyecto de portafolio · diseñado y programado por Rubén Santa Cruz</div>
+</footer>
+
+<div class="overlay" id="overlay"></div>
+<aside class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>Tu carrito</h3>
+    <button class="close-btn" type="button" id="cartCloseBtn" aria-label="Cerrar carrito">&times;</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot"></div>
+</aside>
+
+<script>
+/* ============ CATÁLOGO ============ */
+const PRODUCTS = [
+  { id:'p1', cat:'laptops', name:'Laptop UltraSlim 14"', spec:'Ryzen 7 · 16GB RAM · 512GB SSD', price:3299, badge:'nuevo' },
+  { id:'p2', cat:'laptops', name:'Laptop Creator 16"', spec:'Core i7 · RTX gráfica dedicada · 1TB SSD', price:4899 },
+  { id:'p3', cat:'laptops', name:'Notebook Essential', spec:'Core i5 · 8GB RAM · 256GB SSD', price:1899, badge:'oferta' },
+  { id:'p4', cat:'audio', name:'Auriculares Noise-Cancel', spec:'Cancelación activa · 30h de batería', price:649 },
+  { id:'p5', cat:'audio', name:'Earbuds Sport Pro', spec:'Resistentes al sudor · estuche carga', price:329, badge:'oferta' },
+  { id:'p6', cat:'audio', name:'Parlante Bluetooth XL', spec:'360°, resistente al agua IPX7', price:459 },
+  { id:'p7', cat:'accesorios', name:'Hub USB-C 7-en-1', spec:'HDMI 4K · lector SD · carga rápida', price:159, badge:'nuevo' },
+  { id:'p8', cat:'accesorios', name:'Mouse Ergonómico', spec:'Inalámbrico · silencioso · recargable', price:129 },
+  { id:'p9', cat:'accesorios', name:'Teclado Mecánico Compacto', spec:'Switches táctiles · retroiluminado', price:279 },
+  { id:'p10', cat:'smart-home', name:'Foco Inteligente WiFi', spec:'16M colores · control por voz', price:69 },
+  { id:'p11', cat:'smart-home', name:'Enchufe Inteligente', spec:'Programable · monitoreo de consumo', price:59 },
+  { id:'p12', cat:'smart-home', name:'Cámara de Seguridad WiFi', spec:'1080p · visión nocturna · app móvil', price:219, badge:'oferta' }
+];
+const CATEGORIES = [
+  { id:'todos', label:'Todos' },
+  { id:'laptops', label:'Laptops' },
+  { id:'audio', label:'Audio' },
+  { id:'accesorios', label:'Accesorios' },
+  { id:'smart-home', label:'Smart Home' }
+];
+let activeCat = 'todos';
+let searchTerm = '';
+let sortMode = 'relevancia';
+
+const CART_KEY = 'techstore-cart';
+let cart = JSON.parse(localStorage.getItem(CART_KEY) || '{}'); // id -> qty
+let checkedOut = false;
+const FREE_SHIP_THRESHOLD = 200;
+const SHIP_COST = 15;
+
+function findProduct(id){ return PRODUCTS.find(function(p){ return p.id === id; }); }
+function saveCart(){ localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+
+/* ============ FILTROS ============ */
+function renderSwitches(){
+  const el = document.getElementById('categorySwitches');
+  el.innerHTML = '';
+  CATEGORIES.forEach(function(c){
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'switch' + (c.id === activeCat ? ' is-active' : '');
+    btn.innerHTML = '<span class="track"></span>' + c.label;
+    btn.addEventListener('click', function(){ activeCat = c.id; renderSwitches(); renderGrid(); });
+    el.appendChild(btn);
+  });
+}
+
+function getFilteredProducts(){
+  let list = PRODUCTS.slice();
+  if (activeCat !== 'todos') list = list.filter(function(p){ return p.cat === activeCat; });
+  if (searchTerm.trim()){
+    const term = searchTerm.trim().toLowerCase();
+    list = list.filter(function(p){ return p.name.toLowerCase().indexOf(term) !== -1; });
+  }
+  if (sortMode === 'precio-asc') list.sort(function(a,b){ return a.price - b.price; });
+  if (sortMode === 'precio-desc') list.sort(function(a,b){ return b.price - a.price; });
+  if (sortMode === 'nombre') list.sort(function(a,b){ return a.name.localeCompare(b.name); });
+  return list;
+}
+
+const CAT_LABEL = { laptops:'Laptops', audio:'Audio', accesorios:'Accesorios', 'smart-home':'Smart Home' };
+
+function renderGrid(){
+  const grid = document.getElementById('productGrid');
+  const list = getFilteredProducts();
+  if (list.length === 0){
+    grid.innerHTML = '<p class="no-results">Ningún producto coincide con tu búsqueda.</p>';
+    return;
+  }
+  grid.innerHTML = list.map(function(p){
+    const badgeHTML = p.badge ? '<span class="badge ' + p.badge + '">' + (p.badge === 'nuevo' ? 'Nuevo' : 'Oferta') + '</span>' : '';
+    return (
+      '<div class="card">' +
+        badgeHTML +
+        '<span class="cat">' + CAT_LABEL[p.cat] + '</span>' +
+        '<h3>' + p.name + '</h3>' +
+        '<p class="spec">' + p.spec + '</p>' +
+        '<div class="price-row"><span class="price">S/ ' + p.price.toLocaleString('es-PE') + '</span></div>' +
+        '<button class="add-cart-btn" type="button" data-id="' + p.id + '">Agregar al carrito</button>' +
+      '</div>'
+    );
+  }).join('');
+  grid.querySelectorAll('.add-cart-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      addToCart(btn.getAttribute('data-id'));
+      btn.textContent = 'Agregado ✓';
+      btn.classList.add('just-added');
+      setTimeout(function(){ btn.textContent = 'Agregar al carrito'; btn.classList.remove('just-added'); }, 900);
+    });
+  });
+}
+
+document.getElementById('searchInput').addEventListener('input', function(e){
+  searchTerm = e.target.value; renderGrid();
+});
+document.getElementById('sortSelect').addEventListener('change', function(e){
+  sortMode = e.target.value; renderGrid();
+});
+
+/* ============ CARRITO ============ */
+function addToCart(id){
+  if (checkedOut) { cart = {}; checkedOut = false; }
+  cart[id] = (cart[id] || 0) + 1;
+  saveCart();
+  updateCartCount();
+  renderDrawer();
+}
+function changeQty(id, delta){
+  if (!cart[id]) return;
+  cart[id] += delta;
+  if (cart[id] <= 0) delete cart[id];
+  saveCart();
+  updateCartCount();
+  renderDrawer();
+}
+function removeFromCart(id){ delete cart[id]; saveCart(); updateCartCount(); renderDrawer(); }
+
+function updateCartCount(){
+  const count = Object.values(cart).reduce(function(sum, q){ return sum + q; }, 0);
+  document.getElementById('cartCount').textContent = count;
+}
+
+function cartSubtotal(){
+  return Object.keys(cart).reduce(function(sum, id){
+    const p = findProduct(id);
+    return sum + (p ? p.price * cart[id] : 0);
+  }, 0);
+}
+
+function renderDrawer(){
+  const body = document.getElementById('drawerBody');
+  const foot = document.getElementById('drawerFoot');
+  const ids = Object.keys(cart);
+
+  if (checkedOut){
+    const code = 'TS-' + Math.floor(10000 + Math.random()*89999);
+    body.innerHTML =
+      '<div class="order-confirm">' +
+        '<p>Pedido confirmado</p>' +
+        '<div class="code">#' + code + '</div>' +
+        '<p>Recibirás el envío en 2 a 4 días hábiles.</p>' +
+        '<button class="new-cart-btn" type="button" id="newCartBtn">Seguir comprando</button>' +
+      '</div>';
+    foot.innerHTML = '';
+    document.getElementById('newCartBtn').addEventListener('click', function(){
+      checkedOut = false; cart = {}; saveCart(); updateCartCount(); renderDrawer();
+    });
+    return;
+  }
+
+  if (ids.length === 0){
+    body.innerHTML = '<p class="cart-empty">Tu carrito está vacío.<br>Explora el catálogo y agrega algo.</p>';
+    foot.innerHTML = '';
+    return;
+  }
+
+  body.innerHTML = ids.map(function(id){
+    const p = findProduct(id);
+    const qty = cart[id];
+    return (
+      '<div class="cart-line">' +
+        '<div class="info">' +
+          '<h4>' + p.name + '</h4>' +
+          '<div class="unit">S/ ' + p.price.toLocaleString('es-PE') + ' c/u</div>' +
+          '<div class="qty-row">' +
+            '<button class="qty-btn" type="button" data-act="minus" data-id="' + id + '">–</button>' +
+            '<span>' + qty + '</span>' +
+            '<button class="qty-btn" type="button" data-act="plus" data-id="' + id + '">+</button>' +
+          '</div>' +
+          '<button class="remove-link" type="button" data-id="' + id + '">quitar</button>' +
+        '</div>' +
+        '<div class="line-total">S/ ' + (p.price * qty).toLocaleString('es-PE') + '</div>' +
+      '</div>'
+    );
+  }).join('');
+
+  body.querySelectorAll('.qty-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      changeQty(btn.getAttribute('data-id'), btn.getAttribute('data-act') === 'plus' ? 1 : -1);
+    });
+  });
+  body.querySelectorAll('.remove-link').forEach(function(btn){
+    btn.addEventListener('click', function(){ removeFromCart(btn.getAttribute('data-id')); });
+  });
+
+  const subtotal = cartSubtotal();
+  const shipping = subtotal >= FREE_SHIP_THRESHOLD ? 0 : SHIP_COST;
+  const total = subtotal + shipping;
+  const remaining = Math.max(0, FREE_SHIP_THRESHOLD - subtotal);
+  const shipPct = Math.min(100, Math.round((subtotal / FREE_SHIP_THRESHOLD) * 100));
+
+  foot.innerHTML =
+    '<p class="ship-note">' + (remaining > 0
+      ? 'Te faltan S/ ' + remaining.toLocaleString('es-PE') + ' para envío gratis.'
+      : '¡Tu pedido califica para envío gratis!') + '</p>' +
+    '<div class="ship-bar"><div class="ship-bar-fill" style="width:' + shipPct + '%"></div></div>' +
+    '<div class="totals-row"><span>Subtotal</span><span>S/ ' + subtotal.toLocaleString('es-PE') + '</span></div>' +
+    '<div class="totals-row"><span>Envío</span><span>' + (shipping === 0 ? 'Gratis' : 'S/ ' + shipping) + '</span></div>' +
+    '<div class="totals-row grand"><span>Total</span><span>S/ ' + total.toLocaleString('es-PE') + '</span></div>' +
+    '<button class="checkout-btn" type="button" id="checkoutBtn">Confirmar compra</button>';
+
+  document.getElementById('checkoutBtn').addEventListener('click', function(){
+    checkedOut = true;
+    renderDrawer();
+  });
+}
+
+/* ============ ABRIR / CERRAR DRAWER ============ */
+const drawer = document.getElementById('drawer');
+const overlay = document.getElementById('overlay');
+function openDrawer(){ drawer.classList.add('is-open'); overlay.classList.add('is-open'); renderDrawer(); }
+function closeDrawer(){ drawer.classList.remove('is-open'); overlay.classList.remove('is-open'); }
+
+document.getElementById('cartOpenBtn').addEventListener('click', openDrawer);
+document.getElementById('cartCloseBtn').addEventListener('click', closeDrawer);
+overlay.addEventListener('click', closeDrawer);
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeDrawer(); });
+
+renderSwitches();
+renderGrid();
+updateCartCount();
+</script>
+</body>
+</html>

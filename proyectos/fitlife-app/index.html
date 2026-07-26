@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FitLife App · Panel de entrenamiento</title>
+<meta name="description" content="FitLife App — proyecto de diseño UI/UX de Rubén Santa Cruz. Registra entrenamientos, mira tu progreso semanal y cumple tu meta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --navy:#10233A;
+  --navy-soft:#16304C;
+  --chalk:#EDEFE9;
+  --chalk-dim:#9FB0BE;
+  --blue:#2F6FED;
+  --orange:#FF6B35;
+  --clay:#B5482E;
+  --ok:#3FAE7A;
+  --line:rgba(237,239,233,0.12);
+}
+*,*::before,*::after{ box-sizing:border-box; }
+body{
+  margin:0; background:#0A1626; color:var(--chalk);
+  font-family:'IBM Plex Sans',Arial,sans-serif;
+  min-height:100vh; display:flex; flex-direction:column; align-items:center;
+  padding:28px 16px 60px;
+}
+h1,h2,h3{ font-family:'Bricolage Grotesque',Arial,sans-serif; margin:0; }
+p{ margin:0; }
+button{ font-family:inherit; cursor:pointer; }
+a{ color:inherit; }
+.mono{ font-family:'IBM Plex Mono',monospace; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{ outline:2px solid var(--orange); outline-offset:2px; }
+
+.page-head{ width:100%; max-width:420px; display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; }
+.back-link{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--chalk-dim); text-decoration:none; border-bottom:1px solid transparent; }
+.back-link:hover{ border-color:var(--chalk-dim); }
+.credit{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--chalk-dim); }
+
+/* -------- phone frame -------- */
+.phone{
+  width:100%; max-width:400px; background:var(--navy);
+  border:1px solid rgba(237,239,233,0.08); border-radius:34px;
+  padding:20px 18px 26px; box-shadow:0 30px 60px rgba(0,0,0,.5);
+  position:relative;
+}
+.phone::before{ /* notch */
+  content:''; position:absolute; top:10px; left:50%; transform:translateX(-50%);
+  width:70px; height:6px; border-radius:4px; background:rgba(237,239,233,0.15);
+}
+.app-head{ margin-top:16px; margin-bottom:18px; }
+.app-head .eyebrow{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--orange); text-transform:uppercase; letter-spacing:.08em; }
+.app-head h1{ font-size:24px; margin-top:4px; }
+.app-head .date{ color:var(--chalk-dim); font-size:13px; margin-top:2px; }
+
+.segmented{ display:flex; background:var(--navy-soft); border-radius:10px; padding:4px; gap:4px; margin-bottom:20px; }
+.seg-btn{ flex:1; background:none; border:none; color:var(--chalk-dim); font-size:12.5px; font-weight:600; padding:9px 4px; border-radius:7px; }
+.seg-btn.is-active{ background:var(--blue); color:#fff; }
+
+.screen{ display:none; }
+.screen.is-active{ display:block; animation:fade .25s ease; }
+@keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+/* -------- dashboard -------- */
+.dial-wrap{ display:flex; align-items:center; gap:18px; background:var(--navy-soft); border-radius:16px; padding:18px; margin-bottom:14px; }
+.dial-num{ font-size:26px; font-weight:800; }
+.dial-label{ font-size:11.5px; color:var(--chalk-dim); margin-top:2px; }
+.dial-goal-row{ display:flex; align-items:center; gap:6px; margin-top:10px; }
+.dial-goal-row input{ width:56px; background:var(--navy); border:1px solid var(--line); color:var(--chalk); border-radius:6px; padding:4px 6px; font-size:12px; font-family:'IBM Plex Mono',monospace; }
+.dial-goal-row span{ font-size:11.5px; color:var(--chalk-dim); }
+
+.stats-grid{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:16px; }
+.stat-card{ background:var(--navy-soft); border-radius:12px; padding:12px 10px; text-align:center; }
+.stat-card .num{ font-size:19px; font-weight:800; }
+.stat-card .lbl{ font-size:10px; color:var(--chalk-dim); margin-top:4px; text-transform:uppercase; letter-spacing:.03em; }
+
+.chart-card{ background:var(--navy-soft); border-radius:16px; padding:16px; }
+.chart-card h3{ font-size:13px; margin-bottom:12px; color:var(--chalk-dim); font-weight:600; text-transform:uppercase; letter-spacing:.04em; font-family:'IBM Plex Sans',sans-serif; }
+.bars{ display:flex; align-items:flex-end; gap:8px; height:90px; }
+.bar-col{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; gap:6px; }
+.bar{ width:100%; background:var(--blue); border-radius:4px 4px 2px 2px; min-height:3px; transition:height .3s ease; }
+.bar.today{ background:var(--orange); }
+.bar-col .d{ font-size:10px; color:var(--chalk-dim); }
+
+/* -------- registrar -------- */
+.field{ margin-bottom:14px; }
+.field label{ display:block; font-size:12px; color:var(--chalk-dim); margin-bottom:6px; text-transform:uppercase; letter-spacing:.04em; }
+.field select, .field input{
+  width:100%; background:var(--navy-soft); border:1px solid var(--line); color:var(--chalk);
+  padding:11px 12px; border-radius:9px; font-size:14px; font-family:'IBM Plex Sans',sans-serif;
+}
+.chip-row{ display:flex; gap:8px; }
+.chip{ flex:1; background:var(--navy-soft); border:1px solid var(--line); color:var(--chalk-dim); padding:9px 4px; border-radius:9px; font-size:12.5px; text-align:center; }
+.chip.is-active{ background:var(--orange); border-color:var(--orange); color:#10151f; font-weight:700; }
+.estimate{ background:var(--navy-soft); border-radius:10px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; }
+.estimate .val{ font-size:20px; font-weight:800; color:var(--ok); }
+.save-btn{ width:100%; background:var(--blue); color:#fff; border:none; padding:13px; border-radius:10px; font-weight:700; font-size:14px; }
+.save-btn:hover{ filter:brightness(1.08); }
+.save-toast{ text-align:center; font-size:12.5px; color:var(--ok); margin-top:10px; min-height:16px; }
+
+/* -------- historial -------- */
+.hist-empty{ text-align:center; color:var(--chalk-dim); font-size:13px; padding:40px 0; }
+.hist-item{ display:flex; justify-content:space-between; align-items:center; background:var(--navy-soft); border-radius:12px; padding:12px 14px; margin-bottom:8px; }
+.hist-item .type{ font-weight:700; font-size:13.5px; }
+.hist-item .meta{ font-size:11.5px; color:var(--chalk-dim); margin-top:2px; }
+.hist-item .cal{ font-size:13px; color:var(--ok); font-weight:700; }
+.del-btn{ background:none; border:none; color:var(--clay); font-size:11px; text-decoration:underline; margin-top:4px; padding:0; }
+.hist-item-right{ display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+.reset-row{ text-align:center; margin-top:16px; }
+.reset-link{ background:none; border:none; color:var(--chalk-dim); font-size:11.5px; text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <a class="back-link" href="../../index.html">&larr; Volver al portafolio</a>
+  <span class="credit">Proyecto UI/UX &middot; R. Santa Cruz</span>
+</div>
+
+<div class="phone">
+  <div class="app-head">
+    <span class="eyebrow">FitLife</span>
+    <h1>Hola 👋</h1>
+    <p class="date mono" id="todayLabel"></p>
+  </div>
+
+  <div class="segmented">
+    <button class="seg-btn is-active" data-screen="hoy" type="button">Hoy</button>
+    <button class="seg-btn" data-screen="registrar" type="button">Registrar</button>
+    <button class="seg-btn" data-screen="historial" type="button">Historial</button>
+  </div>
+
+  <!-- ===== HOY ===== -->
+  <section class="screen is-active" id="screen-hoy">
+    <div class="dial-wrap">
+      <svg width="86" height="86" viewBox="0 0 86 86">
+        <circle cx="43" cy="43" r="36" fill="none" stroke="rgba(237,239,233,0.12)" stroke-width="9"/>
+        <circle id="dialArc" cx="43" cy="43" r="36" fill="none" stroke="#2F6FED" stroke-width="9" stroke-linecap="round"
+          stroke-dasharray="226" stroke-dashoffset="226" transform="rotate(-90 43 43)"/>
+        <text id="dialPct" x="43" y="48" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="15" fill="#EDEFE9">0%</text>
+      </svg>
+      <div>
+        <div class="dial-num" id="weekMinutes">0 min</div>
+        <div class="dial-label">de tu meta semanal</div>
+        <div class="dial-goal-row">
+          <span>Meta:</span>
+          <input type="number" id="goalInput" min="30" step="10">
+          <span>min/sem</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card"><div class="num" id="statSessions">0</div><div class="lbl">Sesiones</div></div>
+      <div class="stat-card"><div class="num" id="statMinutes">0</div><div class="lbl">Minutos</div></div>
+      <div class="stat-card"><div class="num" id="statCals">0</div><div class="lbl">Kcal</div></div>
+    </div>
+
+    <div class="chart-card">
+      <h3>Minutos · últimos 7 días</h3>
+      <div class="bars" id="barsChart"></div>
+    </div>
+  </section>
+
+  <!-- ===== REGISTRAR ===== -->
+  <section class="screen" id="screen-registrar">
+    <div class="field">
+      <label>Tipo de entrenamiento</label>
+      <div class="chip-row" id="typeChips">
+        <button class="chip is-active" data-type="cardio" data-met="8" type="button">Cardio</button>
+        <button class="chip" data-type="fuerza" data-met="6" type="button">Fuerza</button>
+        <button class="chip" data-type="yoga" data-met="3" type="button">Yoga</button>
+        <button class="chip" data-type="ciclismo" data-met="9" type="button">Ciclismo</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="durationInput">Duración (minutos)</label>
+      <input type="number" id="durationInput" min="5" max="240" step="5" value="30">
+    </div>
+
+    <div class="field">
+      <label>Intensidad</label>
+      <div class="chip-row" id="intensityChips">
+        <button class="chip" data-factor="0.8" type="button">Baja</button>
+        <button class="chip is-active" data-factor="1" type="button">Media</button>
+        <button class="chip" data-factor="1.25" type="button">Alta</button>
+      </div>
+    </div>
+
+    <div class="estimate">
+      <span>Calorías estimadas</span>
+      <span class="val" id="calEstimate">0 kcal</span>
+    </div>
+
+    <button class="save-btn" type="button" id="saveWorkoutBtn">Guardar entrenamiento</button>
+    <p class="save-toast" id="saveToast"></p>
+  </section>
+
+  <!-- ===== HISTORIAL ===== -->
+  <section class="screen" id="screen-historial">
+    <div id="historyList"></div>
+    <div class="reset-row"><button class="reset-link" type="button" id="resetBtn">Borrar todo el historial</button></div>
+  </section>
+</div>
+
+<script>
+const STORAGE_KEY = 'fitlife-workouts';
+const GOAL_KEY = 'fitlife-goal';
+const DAY_MS = 86400000;
+
+let workouts = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+let weeklyGoal = parseInt(localStorage.getItem(GOAL_KEY) || '150', 10);
+
+/* -------- fecha de hoy -------- */
+document.getElementById('todayLabel').textContent = new Date().toLocaleDateString('es-PE', { weekday:'long', day:'numeric', month:'long' });
+
+/* -------- navegación por pestañas -------- */
+document.querySelectorAll('.seg-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.seg-btn').forEach(function(b){ b.classList.remove('is-active'); });
+    document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('is-active'); });
+    btn.classList.add('is-active');
+    document.getElementById('screen-' + btn.getAttribute('data-screen')).classList.add('is-active');
+    if (btn.getAttribute('data-screen') === 'historial') renderHistory();
+    if (btn.getAttribute('data-screen') === 'hoy') renderDashboard();
+  });
+});
+
+/* -------- helpers de fecha -------- */
+function isoDay(d){ return d.toISOString().split('T')[0]; }
+function startOfWeek(d){
+  const date = new Date(d);
+  const day = (date.getDay() + 6) % 7; // lunes = 0
+  date.setDate(date.getDate() - day);
+  date.setHours(0,0,0,0);
+  return date;
+}
+
+function save(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(workouts)); }
+
+/* -------- registrar entrenamiento -------- */
+let selectedType = 'cardio', selectedMet = 8, selectedFactor = 1;
+
+document.querySelectorAll('#typeChips .chip').forEach(function(chip){
+  chip.addEventListener('click', function(){
+    document.querySelectorAll('#typeChips .chip').forEach(function(c){ c.classList.remove('is-active'); });
+    chip.classList.add('is-active');
+    selectedType = chip.getAttribute('data-type');
+    selectedMet = parseFloat(chip.getAttribute('data-met'));
+    updateEstimate();
+  });
+});
+document.querySelectorAll('#intensityChips .chip').forEach(function(chip){
+  chip.addEventListener('click', function(){
+    document.querySelectorAll('#intensityChips .chip').forEach(function(c){ c.classList.remove('is-active'); });
+    chip.classList.add('is-active');
+    selectedFactor = parseFloat(chip.getAttribute('data-factor'));
+    updateEstimate();
+  });
+});
+document.getElementById('durationInput').addEventListener('input', updateEstimate);
+
+function estimateCalories(){
+  const duration = parseFloat(document.getElementById('durationInput').value) || 0;
+  // fórmula simplificada: MET * 3.5 * peso(70kg) / 200 * minutos, ajustada por intensidad
+  const kcal = (selectedMet * 3.5 * 70 / 200) * duration * selectedFactor;
+  return Math.round(kcal);
+}
+function updateEstimate(){
+  document.getElementById('calEstimate').textContent = estimateCalories() + ' kcal';
+}
+updateEstimate();
+
+document.getElementById('saveWorkoutBtn').addEventListener('click', function(){
+  const duration = parseFloat(document.getElementById('durationInput').value) || 0;
+  const toast = document.getElementById('saveToast');
+  if (duration <= 0){
+    toast.style.color = 'var(--clay)';
+    toast.textContent = 'Ingresa una duración mayor a 0.';
+    setTimeout(function(){ toast.textContent = ''; toast.style.color = ''; }, 2500);
+    return;
+  }
+  const entry = {
+    id: Date.now(),
+    type: selectedType,
+    duration: duration,
+    calories: estimateCalories(),
+    date: new Date().toISOString()
+  };
+  workouts.unshift(entry);
+  save();
+  toast.textContent = 'Entrenamiento guardado ✓';
+  setTimeout(function(){ toast.textContent = ''; }, 2500);
+  renderDashboard();
+});
+
+/* -------- historial -------- */
+const TYPE_LABEL = { cardio:'Cardio', fuerza:'Fuerza', yoga:'Yoga', ciclismo:'Ciclismo' };
+
+function renderHistory(){
+  const list = document.getElementById('historyList');
+  if (workouts.length === 0){
+    list.innerHTML = '<p class="hist-empty">Todavía no registraste entrenamientos.<br>Ve a la pestaña "Registrar" para añadir el primero.</p>';
+    return;
+  }
+  list.innerHTML = workouts.map(function(w){
+    const d = new Date(w.date);
+    const dateStr = d.toLocaleDateString('es-PE', { day:'2-digit', month:'short' });
+    return (
+      '<div class="hist-item">' +
+        '<div><div class="type">' + (TYPE_LABEL[w.type] || w.type) + '</div>' +
+        '<div class="meta">' + dateStr + ' · ' + w.duration + ' min</div></div>' +
+        '<div class="hist-item-right"><span class="cal">' + w.calories + ' kcal</span>' +
+        '<button class="del-btn" type="button" data-id="' + w.id + '">eliminar</button></div>' +
+      '</div>'
+    );
+  }).join('');
+  list.querySelectorAll('.del-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      const id = parseInt(btn.getAttribute('data-id'), 10);
+      workouts = workouts.filter(function(w){ return w.id !== id; });
+      save();
+      renderHistory();
+      renderDashboard();
+    });
+  });
+}
+
+document.getElementById('resetBtn').addEventListener('click', function(){
+  if (!confirm('¿Borrar todo el historial de entrenamientos? Esta acción no se puede deshacer.')) return;
+  workouts = [];
+  save();
+  renderHistory();
+  renderDashboard();
+});
+
+/* -------- goal -------- */
+const goalInput = document.getElementById('goalInput');
+goalInput.value = weeklyGoal;
+goalInput.addEventListener('change', function(){
+  weeklyGoal = Math.max(30, parseInt(goalInput.value, 10) || 150);
+  goalInput.value = weeklyGoal;
+  localStorage.setItem(GOAL_KEY, String(weeklyGoal));
+  renderDashboard();
+});
+
+/* -------- dashboard -------- */
+function renderDashboard(){
+  const now = new Date();
+  const weekStart = startOfWeek(now);
+  const thisWeek = workouts.filter(function(w){ return new Date(w.date) >= weekStart; });
+
+  const totalMinutes = thisWeek.reduce(function(sum, w){ return sum + w.duration; }, 0);
+  const totalCals = thisWeek.reduce(function(sum, w){ return sum + w.calories; }, 0);
+
+  document.getElementById('weekMinutes').textContent = totalMinutes + ' min';
+  document.getElementById('statSessions').textContent = thisWeek.length;
+  document.getElementById('statMinutes').textContent = totalMinutes;
+  document.getElementById('statCals').textContent = totalCals;
+
+  const pct = Math.min(100, Math.round((totalMinutes / weeklyGoal) * 100));
+  const circumference = 226;
+  const offset = circumference - (circumference * pct / 100);
+  document.getElementById('dialArc').setAttribute('stroke-dashoffset', offset);
+  document.getElementById('dialPct').textContent = pct + '%';
+
+  renderBars();
+}
+
+function renderBars(){
+  const el = document.getElementById('barsChart');
+  const days = [];
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  for (let i = 6; i >= 0; i--){
+    const d = new Date(today.getTime() - i * DAY_MS);
+    const dayMinutes = workouts
+      .filter(function(w){ return isoDay(new Date(w.date)) === isoDay(d); })
+      .reduce(function(sum, w){ return sum + w.duration; }, 0);
+    days.push({ date:d, minutes:dayMinutes });
+  }
+  const max = Math.max(60, Math.max.apply(null, days.map(function(d){ return d.minutes; })));
+  const labels = ['L','M','X','J','V','S','D'];
+
+  el.innerHTML = days.map(function(d){
+    const isToday = isoDay(d.date) === isoDay(today);
+    const h = d.minutes === 0 ? 3 : Math.max(4, Math.round((d.minutes / max) * 78));
+    return (
+      '<div class="bar-col">' +
+        '<div class="bar' + (isToday ? ' today' : '') + '" style="height:' + h + 'px" title="' + d.minutes + ' min"></div>' +
+        '<span class="d">' + labels[(d.date.getDay() + 6) % 7] + '</span>' +
+      '</div>'
+    );
+  }).join('');
+}
+
+renderDashboard();
+</script>
+</body>
+</html>
