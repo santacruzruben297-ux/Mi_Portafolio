@@ -24,7 +24,7 @@ Abre `index.html` o publica el contenido de esta carpeta en un alojamiento de si
 
 Edita los nombres, logos, portadas, colores y datos disponibles en cada CONFIG. Los precios se escriben como números en soles, sin `S/`. Los comentarios del código están en español. Las rutas de las demos se interpretan desde su `index.html`, por eso las imágenes comunes empiezan por `../../img/`.
 
-El CV está vacío: añade tu PDF real y cambia `CONFIG.perfil.cv` para mostrar el botón. No se ha inventado un historial profesional.
+El CV está integrado en `documents/CV-Ruben-Santa-Cruz.pdf`, con los cinco proyectos actuales y los datos del documento anterior. El botón "Descargar CV (PDF)" aparece en "Sobre mí" y su ruta se cambia desde `CONFIG.perfil.cv`. Para actualizarlo, reemplaza el PDF manteniendo el nombre; si lo renombras, cambia también esa ruta. Deja el campo vacío para ocultar el botón.
 
 ## Imágenes completas
 

@@ -347,8 +347,9 @@
           { nombre: "Instagram", url: "https://www.instagram.com/rubensantacruzquispe/" },
           { nombre: "LinkedIn", url: "https://www.linkedin.com/in/ruben-efrain-santacruz-quispe-646992397/" }
         ],
-        // Opcional: añade tu PDF real y su ruta aquí. Vacío oculta el botón.
-        cv: "",
+        // Guarda tu CV en documents/ y cambia esta ruta si renombras el PDF.
+        // Deja el campo vacío para ocultar el botón de descarga.
+        cv: "documents/CV-Ruben-Santa-Cruz.pdf",
         sobreMi: [
           "Soy diseñador web y UI/UX con base en Perú. Me interesa que una interfaz sea clara: buena jerarquía, navegación sencilla y decisiones que ayuden a quien la usa.",
           "Trabajo desde la estructura hasta los detalles visuales y el desarrollo. Busco que cada proyecto tenga su propia identidad y funcione bien en el celular."
@@ -500,7 +501,14 @@
       (profile.redes||[]).forEach(function(s){const url=safeURL(s.url);if(url)$("socials").append(external(url,"",s.nombre+" ↗"));});
       (profile.sobreMi||[]).forEach(function(p){$("about-copy").append(el("p","",p));});
       const tools=el("div","tools");(profile.herramientas||[]).forEach(function(t){tools.append(el("span","",t));});$("about-copy").append(tools);
-      const cv=safeURL(profile.cv,true);if(cv){const link=external(cv,"project-link","Descargar CV ↗");link.download="CV.pdf";$("about-copy").append(link);}
+      const cv=safeURL(profile.cv,true);
+      if(cv){
+        const link=external(cv,"project-link","Descargar CV (PDF)");
+        // Conserva el nombre del PDF; la ruta sigue saliendo de CONFIG.
+        link.download=new URL(cv).pathname.split("/").pop()||"CV.pdf";
+        link.setAttribute("aria-label","Descargar currículum de "+profile.nombre+" en PDF");
+        $("about-copy").append(link);
+      }
       CONFIG.proceso.forEach(function(item){const li=el("li");const box=el("div");box.append(el("h3","",item.titulo),el("p","",item.descripcion));li.append(box);$("process").append(li);});
       CONFIG.servicios.forEach(function(s,i){
         const row=el("article","service");row.append(el("span","service-index",String(i+1).padStart(2,"0")));
