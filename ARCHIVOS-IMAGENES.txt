@@ -1,0 +1,56 @@
+IMÁGENES DEL PROYECTO
+
+Se incluyen 50 imágenes locales. Conserva los nombres y las carpetas.
+Los cuatro logos nuevos son PNG transparentes; las fotos son WebP.
+Todas las fotografías se muestran con su encuadre completo.
+
+img/estudio-diseno.webp
+img/fitlife-portada-v2.webp
+img/logo-fitlife.png
+img/logo-nova-coffee.png
+img/logo-ruben.png
+img/logo-techstore.png
+img/nova-brownie.webp
+img/nova-cold-brew.webp
+img/nova-croissant.webp
+img/nova-espresso.webp
+img/nova-flat-white.webp
+img/nova-matcha.webp
+img/nova-portada-v2.webp
+img/tech-audifonos.webp
+img/tech-laptop.webp
+img/tech-parlante.webp
+img/tech-teclado.webp
+img/techstore-portada-v2.webp
+proyectos/casa-criolla/img/aji-de-gallina.webp
+proyectos/casa-criolla/img/arroz-con-mariscos.webp
+proyectos/casa-criolla/img/arroz-con-pollo.webp
+proyectos/casa-criolla/img/causa-limena.webp
+proyectos/casa-criolla/img/ceviche-de-la-casa.webp
+proyectos/casa-criolla/img/chicha-morada.webp
+proyectos/casa-criolla/img/limonada-hierbabuena.webp
+proyectos/casa-criolla/img/logo-casa-criolla.webp
+proyectos/casa-criolla/img/lomo-saltado.webp
+proyectos/casa-criolla/img/mazamorra-morada.webp
+proyectos/casa-criolla/img/papa-a-la-huancaina.webp
+proyectos/casa-criolla/img/portada-casa-criolla-v2.webp
+proyectos/casa-criolla/img/suspiro-a-la-limena.webp
+proyectos/casa-criolla/img/tallarines-verdes.webp
+proyectos/dulce-antojo/img/alfajores-artesanales.webp
+proyectos/dulce-antojo/img/cheesecake-frutos-rojos.webp
+proyectos/dulce-antojo/img/cookies-chispas.webp
+proyectos/dulce-antojo/img/cupcake-chocolate.webp
+proyectos/dulce-antojo/img/cupcake-fresa.webp
+proyectos/dulce-antojo/img/cupcake-limon.webp
+proyectos/dulce-antojo/img/cupcake-vainilla.webp
+proyectos/dulce-antojo/img/galletas-avena.webp
+proyectos/dulce-antojo/img/galletas-mantequilla.webp
+proyectos/dulce-antojo/img/logo-dulce-antojo.webp
+proyectos/dulce-antojo/img/mousse-chocolate.webp
+proyectos/dulce-antojo/img/panna-cotta-maracuya.webp
+proyectos/dulce-antojo/img/portada-dulce-antojo.webp
+proyectos/dulce-antojo/img/torta-chocolate.webp
+proyectos/dulce-antojo/img/torta-red-velvet.webp
+proyectos/dulce-antojo/img/torta-vainilla-fresas.webp
+proyectos/dulce-antojo/img/torta-zanahoria.webp
+proyectos/dulce-antojo/img/tres-leches-vasito.webp

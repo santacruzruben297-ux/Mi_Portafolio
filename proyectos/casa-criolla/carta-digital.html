@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#244A3D" id="theme-color">
+  <meta name="description" content="Carta digital del restaurante." id="page-description">
+  <title>Carta digital</title>
+  <style>
+    /* El diseño utiliza variables: el JavaScript las completa desde CONFIG. */
+    :root {
+      --principal: #244a3d;
+      --secundario: #bc5939;
+      --fondo: #faf7f0;
+      --texto: #252d29;
+      --principal-tinta: #244a3d;
+      --secundario-tinta: #a34526;
+      --sobre-principal: #fff;
+      --sobre-secundario: #fff;
+      --superficie: #fffdf9;
+      --suave: #eceee6;
+      --acento-suave: #f5e8de;
+      --borde: #dfdfd5;
+      --tenue: #60655d;
+      --nav-height: 78px;
+      --fuente: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --fuente-titulos: Georgia, "Times New Roman", serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-height) + 18px); }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font-family: var(--fuente); -webkit-font-smoothing: antialiased; }
+    button, input { font: inherit; }
+    button, a, input { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+    button, input { color: inherit; }
+    button { border: 0; }
+    img { display: block; max-width: 100%; }
+    [hidden] { display: none !important; }
+    :focus-visible { outline: 3px solid var(--secundario-tinta); outline-offset: 4px; }
+    .wrap { width: min(1120px, calc(100% - 36px)); margin-inline: auto; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+    .icon { display: block; width: 20px; height: 20px; flex: 0 0 auto; }
+    .skip-link { position: fixed; top: -100px; left: 16px; z-index: 10; padding: 12px 18px; border-radius: 10px; background: var(--principal); color: var(--sobre-principal); }
+    .skip-link:focus { top: 12px; }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 100px; padding-block: 20px; border-bottom: 1px solid var(--borde); }
+    .brand { display: inline-flex; align-items: center; gap: 11px; min-width: 0; }
+    .brand > span:last-child { min-width: 0; }
+    .brand-mark { position: relative; width: 46px; height: 46px; flex: 0 0 auto; border-radius: 50%; display: grid; place-items: center; background: var(--principal); color: var(--sobre-principal); overflow: hidden; }
+    .brand-mark img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+    .brand-initials { font: 19px var(--fuente-titulos); }
+    .brand-name { display: block; font: 700 23px/1.08 var(--fuente-titulos); letter-spacing: -.6px; overflow-wrap: anywhere; }
+    .brand-note { display: block; margin-top: 6px; font-size: 10px; font-weight: 650; letter-spacing: 1.8px; text-transform: uppercase; color: var(--tenue); }
+    .header-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .social-link { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--borde); border-radius: 50%; transition: background .18s, transform .18s; }
+    .social-link:hover { background: var(--suave); transform: translateY(-2px); }
+    .header-order { display: none; }
+    .hero { padding-block: 35px 33px; display: grid; gap: 28px; align-items: center; }
+    .eyebrow { display: flex; align-items: center; gap: 8px; color: var(--principal-tinta); font-size: 10px; font-weight: 750; letter-spacing: 2px; text-transform: uppercase; }
+    .eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--secundario); }
+    .hero h1 { margin: 18px 0 16px; font: 400 clamp(42px, 10.7vw, 76px)/1.02 var(--fuente-titulos); letter-spacing: -2px; color: var(--principal-tinta); white-space: pre-line; overflow-wrap: anywhere; }
+    .hero h1 em { font-weight: 400; color: var(--secundario-tinta); }
+    .hero-description { max-width: 400px; margin: 0; color: var(--tenue); font-size: 15px; line-height: 1.75; overflow-wrap: anywhere; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 24px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 12px 21px; border-radius: 100px; background: var(--principal); color: var(--sobre-principal); font-weight: 650; font-size: 13px; transition: transform .18s, box-shadow .18s; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 5px 12px rgb(0 0 0 / .09); }
+    .hero-location { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--tenue); }
+    .hero-location .icon { width: 16px; height: 16px; }
+    .visual-label { position: absolute; bottom: 16px; right: 16px; display: flex; align-items: center; gap: 9px; max-width: calc(100% - 32px); padding: 10px 14px; border: 1px solid var(--borde); border-radius: 12px; background: var(--superficie); box-shadow: 0 4px 12px rgb(0 0 0 / .03); font-size: 11px; font-weight: 650; }
+    .visual-label .icon { color: var(--principal-tinta); width: 18px; height: 18px; }
+    .hero-corner { padding: 8px 12px; border-radius: 100px; background: var(--superficie); position: absolute; top: 18px; left: 20px; font-size: 9px; letter-spacing: 2px; font-weight: 700; color: var(--principal-tinta); }
+    .category-nav { position: sticky; top: 0; z-index: 5; background: var(--fondo); border-block: 1px solid var(--borde); box-shadow: 0 3px 12px rgb(0 0 0 / .025); }
+    .nav-inner { display: flex; align-items: center; gap: 22px; }
+    .nav-label { display: none; flex: 0 0 auto; font: 700 17px var(--fuente-titulos); }
+    .category-tabs { display: flex; align-items: center; gap: 8px; padding: 14px 3px; overflow-x: auto; min-width: 0; scrollbar-width: none; overscroll-behavior-x: contain; }
+    .category-tabs::-webkit-scrollbar { display: none; }
+    .category-tab { display: flex; align-items: center; justify-content: center; flex: 0 0 auto; gap: 8px; min-height: 44px; padding: 10px 18px; border-radius: 100px; background: transparent; color: var(--tenue); font-size: 13px; font-weight: 600; white-space: nowrap; transition: background .18s, color .18s; }
+    .category-tab:hover { background: var(--suave); color: var(--texto); }
+    .category-tab[aria-current="true"] { background: var(--principal); color: var(--sobre-principal); }
+    .tab-count { font-size: 10px; opacity: 1; font-variant-numeric: tabular-nums; }
+    .menu { padding-top: 37px; }
+    .menu-heading { display: flex; flex-direction: column; gap: 22px; margin-bottom: 31px; }
+    .section-kicker { margin: 0 0 10px; color: var(--secundario-tinta); font-size: 10px; font-weight: 750; letter-spacing: 1.8px; text-transform: uppercase; }
+    .menu-heading h2 { margin: 0; font: 400 30px/1.16 var(--fuente-titulos); letter-spacing: -.9px; }
+    .menu-intro { margin: 10px 0 0; font-size: 13px; line-height: 1.65; color: var(--tenue); }
+    .search { position: relative; display: flex; align-items: center; gap: 10px; min-height: 48px; border: 1px solid var(--borde); border-radius: 100px; background: var(--superficie); padding-inline: 17px 6px; }
+    .search > .icon { color: var(--tenue); width: 18px; height: 18px; }
+    /* 16 px evita que Safari amplíe la pantalla al enfocar el buscador. */
+    .search input { min-width: 0; width: 100%; padding: 13px 0; border: 0; background: transparent; font-size: 16px; outline: none; }
+    .search input::placeholder { color: var(--tenue); opacity: 1; }
+    .search input::-webkit-search-cancel-button, .search input::-webkit-search-decoration { -webkit-appearance: none; }
+    .search:focus-within { border-color: var(--principal); box-shadow: 0 0 0 2px var(--suave); }
+    .search-clear { display: grid; place-items: center; flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; background: transparent; }
+    .search-clear:hover { background: var(--suave); }
+    .search-clear .icon { width: 17px; height: 17px; }
+    .menu-section { margin-bottom: 38px; scroll-margin-top: calc(var(--nav-height) + 18px); }
+    .section-heading { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .section-number { display: grid; place-items: center; width: 32px; height: 32px; border: 1px solid var(--borde); border-radius: 50%; font-size: 10px; letter-spacing: 1px; color: var(--tenue); }
+    .section-title { margin: 0; font: 400 26px/1.18 var(--fuente-titulos); letter-spacing: -.7px; overflow-wrap: anywhere; }
+    .section-heading::after { content: ""; height: 1px; flex: 1; background: var(--borde); }
+    .category-description { margin: -6px 0 18px 46px; font-size: 12px; color: var(--tenue); line-height: 1.6; }
+    .dish-grid { display: grid; gap: 13px; }
+    .dish { min-width: 0; display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--borde); border-radius: 16px; background: var(--superficie); transition: border-color .2s, transform .2s, box-shadow .2s; }
+    .dish:hover { border-color: var(--principal); transform: translateY(-2px); box-shadow: 0 6px 20px rgb(0 0 0 / .035); }
+    .dish-top { display: flex; align-items: flex-start; gap: 16px; flex: 1; }
+    .dish-info { min-width: 0; flex: 1; }
+    .dish-tag { display: inline-flex; align-items: center; gap: 5px; margin-bottom: 8px; padding: 4px 8px; border-radius: 5px; background: var(--acento-suave); color: var(--secundario-tinta); font-size: 9px; line-height: 1.35; font-weight: 750; letter-spacing: .3px; }
+    .dish-tag .icon { width: 10px; height: 10px; }
+    .dish h3 { margin: 2px 0 8px; font: 600 19px/1.15 var(--fuente-titulos); letter-spacing: -.35px; overflow-wrap: anywhere; }
+    .dish-description { margin: 0; color: var(--tenue); font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+    .dish-photo { flex: 0 0 96px; width: 96px; height: 106px; border-radius: 10px; object-fit: contain; background: var(--suave); }
+    .dish.has-photo-error .dish-photo { display: none; }
+    .dish-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 17px; padding-top: 14px; border-top: 1px solid var(--borde); }
+    .dish-price { font-size: 18px; line-height: 1.2; font-weight: 700; letter-spacing: -.6px; font-variant-numeric: tabular-nums; }
+    .dish-order { display: inline-flex; align-items: center; gap: 7px; justify-content: center; min-height: 44px; padding: 10px 17px; border-radius: 100px; background: var(--suave); color: var(--principal-tinta); font-size: 12px; font-weight: 750; transition: background .18s, color .18s; }
+    .dish-order .icon { width: 15px; height: 15px; }
+    .dish-order:hover { background: var(--principal); color: var(--sobre-principal); }
+    .empty-state { text-align: center; padding: 40px 16px 50px; }
+    .empty-state > .icon { margin: 0 auto 16px; width: 40px; height: 40px; color: var(--secundario-tinta); }
+    .empty-state h3 { margin: 0 0 12px; font: 400 27px var(--fuente-titulos); }
+    .empty-state p { color: var(--tenue); font-size: 13px; line-height: 1.6; }
+    .empty-state button { margin-top: 12px; }
+    .contact { margin-top: 14px; margin-bottom: 32px; padding: 27px 23px; display: grid; gap: 25px; border-radius: 19px; background: var(--principal); color: var(--sobre-principal); }
+    .contact h2 { margin: 0 0 10px; font: 400 31px/1.15 var(--fuente-titulos); letter-spacing: -.8px; overflow-wrap: anywhere; }
+    .contact-intro { margin: 0; font-size: 13px; line-height: 1.7; }
+    .contact-link { margin-top: 20px; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 10px 17px; border-radius: 100px; background: var(--sobre-principal); color: var(--principal); font-size: 12px; font-weight: 750; }
+    .contact-details { display: grid; gap: 22px; }
+    .detail { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+    .detail > .icon { width: 20px; height: 20px; margin-top: 2px; opacity: .9; }
+    .detail h3 { margin: 0 0 7px; font-size: 10px; letter-spacing: 1.3px; text-transform: uppercase; }
+    .detail p, .detail a { margin: 0; font-size: 13px; line-height: 1.7; white-space: pre-line; overflow-wrap: anywhere; }
+    .detail a { display: inline-block; text-decoration: underline; text-underline-offset: 4px; }
+    .footer { display: flex; flex-direction: column; gap: 16px; padding-bottom: calc(108px + env(safe-area-inset-bottom)); color: var(--tenue); }
+    .footer-name { color: var(--principal-tinta); font: 700 19px var(--fuente-titulos); }
+    .footer p { margin: 6px 0 0; font-size: 11px; line-height: 1.65; overflow-wrap: anywhere; }
+    .footer-socials { display: flex; align-items: center; gap: 10px; }
+    .wa-float { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: calc(18px + env(safe-area-inset-bottom)); z-index: 6; display: flex; align-items: center; justify-content: center; gap: 10px; width: 58px; height: 58px; padding: 16px; border-radius: 100px; background: var(--principal); color: var(--sobre-principal); box-shadow: 0 6px 24px rgb(0 0 0 / .22); border: 2px solid var(--fondo); transition: transform .18s; }
+    .wa-float:hover { transform: translateY(-3px); }
+    .wa-float .icon { width: 25px; height: 25px; }
+    .wa-float span { display: none; }
+    .notice { margin: 30px auto; padding: 20px; border: 1px solid var(--borde); border-radius: 12px; max-width: 600px; line-height: 1.7; }
+    @media (max-width: 359px) {
+      .wrap { width: calc(100% - 28px); }
+      .brand-name { font-size: 21px; }
+      .brand-note { font-size: 9px; letter-spacing: 1px; }
+      .masthead { gap: 8px; }
+      .header-actions { gap: 5px; }
+      .header-actions .social-link { width: 44px; height: 44px; }
+      .dish { padding: 15px; }
+      .dish-top { gap: 11px; }
+      .dish-photo { flex-basis: 80px; width: 80px; height: 90px; }
+      .hero h1 { font-size: 40px; }
+    }
+    @media (min-width: 600px) {
+      .wrap { width: min(1120px, calc(100% - 64px)); }
+      .hero { grid-template-columns: 1.12fr 1fr; gap: 24px; padding-block: 43px; }
+      .hero h1 { font-size: clamp(45px, 6.5vw, 76px); }
+      .hero-location { width: 100%; }
+      .menu-heading { flex-direction: row; justify-content: space-between; align-items: center; gap: 24px; }
+      .search { width: 250px; flex-shrink: 0; }
+      .contact { grid-template-columns: 1fr 1fr; padding: 32px; }
+      .footer { flex-direction: row; align-items: center; justify-content: space-between; padding-bottom: 80px; }
+      .wa-float { width: auto; height: auto; min-height: 55px; padding: 13px 21px; right: 24px; bottom: 24px; }
+      .wa-float span { display: block; font-size: 13px; font-weight: 650; }
+    }
+    @media (min-width: 820px) {
+      .masthead { min-height: 106px; }
+      .brand-mark { width: 48px; height: 48px; }
+      .brand-name { font-size: 27px; }
+      .header-order { display: inline-flex; margin-left: 7px; }
+      .hero { gap: 62px; padding-block: 46px 50px; }
+      .hero h1 { margin-top: 23px; }
+      .hero-description { font-size: 15px; }
+      .hero-location { width: auto; }
+      .visual-label { bottom: 24px; right: 24px; font-size: 12px; padding: 12px 16px; }
+      .hero-corner { top: 24px; left: 27px; }
+      .nav-label { display: block; }
+      .category-tabs { flex: 1; }
+      .menu { padding-top: 45px; }
+      .menu-heading { margin-bottom: 34px; }
+      .menu-heading h2 { font-size: 36px; }
+      .search { width: 290px; }
+      .dish-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+      .dish { padding: 22px; }
+      .dish h3 { font-size: 22px; }
+      .dish-description { font-size: 13px; }
+      .dish-photo { width: 116px; height: 124px; flex-basis: 116px; }
+      .dish-footer { margin-top: 20px; }
+      .dish-price { font-size: 21px; }
+      .section-title { font-size: 30px; }
+      .menu-section { margin-bottom: 43px; }
+      .contact { grid-template-columns: 1.1fr 1fr; gap: 65px; padding: 38px 42px; margin-top: 20px; margin-bottom: 28px; }
+      .contact-details { grid-template-columns: 1fr 1fr; gap: 28px; align-content: center; }
+      .contact h2 { font-size: 38px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+
+    /* Fotos reales desde CONFIG: completas, sin dibujos ni recortes. */
+    .hero > div { min-width:0; }
+    .hero-visual { display:flex; flex-direction:column; gap:12px; padding:14px; align-self:center; min-width:0; border:1px solid var(--borde); border-radius:22px; background:var(--suave); }
+    .hero-photo { display:block; width:100%; height:auto; object-fit:contain; object-position:center; border-radius:10px; }
+    /* Si falta la portada, el texto ocupa el ancho disponible. */
+    .hero.has-no-photo { grid-template-columns:minmax(0,1fr); }
+    .hero-corner, .visual-label { position:static; max-width:100%; }
+    .hero-corner { align-self:flex-start; }
+    .visual-label { align-self:flex-end; }
+    .brand-mark { border-radius:12px; background:var(--superficie); }
+    .brand-mark img { padding:3px; object-fit:contain; }
+    .dish-photo, .product-photo { object-fit:contain; object-position:center; padding:3px; }
+  </style>
+</head>
+<body>
+  <!-- El contenido se construye automáticamente. No necesitas modificar el HTML. -->
+  <div id="app"></div>
+  <noscript><p class="notice">Activa JavaScript en tu navegador para ver la carta digital.</p></noscript>
+
+  <script>
+    /* ================================================================
+       CONFIG: TODA LA PERSONALIZACIÓN ESTÁ AQUÍ.
+       Cambia únicamente los valores de este objeto y guarda el archivo.
+       Conserva las comillas de los textos y las comas entre elementos.
+       Para añadir un plato o categoría, duplica su objeto dentro del array.
+       ================================================================ */
+    const CONFIG = {
+      negocio: {
+        nombre: "Casa Criolla",                  // Nombre del restaurante.
+        eslogan: "Recetas de siempre. Momentos para compartir.",
+        // Logo original generado con IA: usa el archivo incluido en img/.
+        // Puedes sustituir esta ruta por otra imagen local o una URL.
+        // Si dejas "", se mostrarán las iniciales del negocio.
+        logo: "img/logo-casa-criolla.webp",
+        tipo: "Cocina peruana",                  // Texto pequeño bajo el nombre.
+        zona: "Miraflores, Lima",               // Ubicación breve junto al botón principal.
+        horario: "Lunes a sábado: 12:00 – 22:00\nDomingo: 12:00 – 18:00", // Usa \n para saltos de línea.
+        direccion: "Av. del Buen Sabor 245, Miraflores, Lima", // Dirección ficticia de ejemplo.
+        instagram: "https://www.instagram.com/", // Sustituye por la URL de tu perfil o "" para ocultarlo.
+        facebook: "https://www.facebook.com/",   // Sustituye por la URL de tu página o "" para ocultarlo.
+        // Portada original generada con IA. Cambia la ruta o usa "" para ocultar la foto.
+        fotoPortada: "img/portada-casa-criolla-v2.webp",
+        // Texto alternativo de la foto: cambia esta descripción junto con la portada.
+        fotoPortadaAlt: "Lomo saltado, causa limeña y chicha morada en Casa Criolla"
+      },
+
+      // WhatsApp de contacto: +51 923 602 215. Cambia aquí el número para otro cliente.
+      // Incluye el código de país, solo dígitos, sin +, espacios ni guiones.
+      // Para Perú: 51 seguido de los 9 dígitos de tu celular.
+      whatsapp: "51923602215",
+
+      // Colores en formato hexadecimal. Los tonos suaves se calculan solos.
+      colores: {
+        principal: "#244A3D",  // Botones, pestaña activa, portada y bloque de contacto.
+        secundario: "#B65232", // Acentos, etiquetas y palabras destacadas.
+        fondo: "#FAF7F0",      // Fondo de toda la página.
+        texto: "#252D29"       // Color del texto principal.
+      },
+
+      // Formato de precios: PEN = soles, USD = dólares, etc.
+      // Los precios de cada plato son números: 32 o 32.50, sin "S/".
+      moneda: "PEN",
+      idioma: "es-PE",
+
+      // Tipografías locales, sin Google Fonts ni librerías externas.
+      fuentes: {
+        texto: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+        titulos: 'Georgia, "Times New Roman", serif'
+      },
+
+      // Todos los textos visibles de la interfaz también se cambian aquí.
+      interfaz: {
+        portadaEtiqueta: "Hecho con cariño, servido con sabor",
+        titulo: "El sabor de casa,",             // Primera línea del título.
+        tituloDestacado: "a un toque.",          // Segunda línea, en color secundario.
+        portadaSello: "Desde nuestra cocina, para ti",
+        portadaDetalle: "FRESCO · CASERO · PERUANO",
+        verCarta: "Explorar la carta",
+        carta: "Nuestra carta",
+        cartaEtiqueta: "Siempre hay un buen antojo",
+        cartaTitulo: "¿Qué se te antoja hoy?",
+        cartaDescripcion: "Elige tu favorito y pídenos directamente por WhatsApp.",
+        buscar: "Buscar un plato o ingrediente…",
+        limpiarBusqueda: "Limpiar búsqueda",
+        pedir: "Pedir",
+        pedirPorWhatsapp: "Pedir por WhatsApp",
+        whatsappFlotante: "¿Te ayudamos a pedir?",
+        mensajePlato: "Hola, quiero pedir: {plato}", // {plato} se sustituye automáticamente.
+        mensajeGeneral: "Hola, quiero hacer un pedido en {negocio}.",
+        contactoTitulo: "Tu mesa empieza aquí.",
+        contactoDescripcion: "¿Un antojo, un pedido o una consulta? Nos encantará atenderte.",
+        contactoBoton: "Conversemos por WhatsApp",
+        horarioTitulo: "Horario de atención",
+        direccionTitulo: "Encuéntranos",
+        sinResultadosTitulo: "No encontramos ese antojo",
+        sinResultadosDescripcion: "Prueba con otro nombre o ingrediente.",
+        mostrarCarta: "Ver toda la carta",
+        resultadoSingular: "plato encontrado",
+        resultadoPlural: "platos encontrados",
+        cartaVacia: "Estamos preparando nuestra carta. Escríbenos para conocer los platos del día.",
+        precioConsultar: "Consultar precio",
+        pie: "Buen sabor, buena compañía.",
+        saltarContenido: "Ir a la carta",
+        instagram: "Instagram",
+        facebook: "Facebook"
+      },
+
+      // Puedes añadir, quitar o reordenar categorías. No hacen falta IDs.
+      // Todas las fotos se cargan desde img/, junto a este HTML.
+      // Cambia foto por otra ruta o URL. Con "" el plato se adapta sin dejar huecos.
+      categorias: [
+        {
+          nombre: "Entradas",
+          descripcion: "Para abrir el apetito y compartir.", // Opcional: usa "" para ocultar.
+          platos: [
+            {
+              nombre: "Causa limeña",
+              descripcion: "Papa amarilla, pollo deshilachado, palta y nuestra mayonesa de la casa.",
+              precio: 18,
+              foto: "img/causa-limena.webp",              // Ruta o URL de la foto. Con "" el texto aprovecha todo el espacio.
+              etiqueta: "Más pedido" // Texto opcional; usa "" o elimina el campo para ocultarlo.
+            },
+            {
+              nombre: "Papa a la huancaína",
+              descripcion: "Papas tiernas con crema de ají amarillo, queso fresco, huevo y aceitunas.",
+              precio: 16,
+              // Foto del plato generada con IA e incluida en la carpeta img/.
+              // Si la URL falla, se ocultará automáticamente sin dejar un hueco.
+              foto: "img/papa-a-la-huancaina.webp",
+              etiqueta: ""
+            }
+          ]
+        },
+        {
+          nombre: "Fondos",
+          descripcion: "Los clásicos de nuestra cocina, hechos a nuestra manera.",
+          platos: [
+            {
+              nombre: "Lomo saltado",
+              descripcion: "Lomo al wok con cebolla, tomate y un toque de sillao. Con papas doradas y arroz.",
+              precio: 35,
+              foto: "img/lomo-saltado.webp",
+              etiqueta: "Más pedido"
+            },
+            {
+              nombre: "Ají de gallina",
+              descripcion: "Nuestra crema de ají amarillo con pollo, pecanas y queso. Con arroz y papa.",
+              precio: 28,
+              foto: "img/aji-de-gallina.webp",
+              etiqueta: ""
+            },
+            {
+              nombre: "Arroz con pollo",
+              descripcion: "Arroz al culantro, pollo jugoso, verduras y sarsa criolla recién preparada.",
+              precio: 27,
+              foto: "img/arroz-con-pollo.webp",
+              etiqueta: ""
+            },
+            {
+              nombre: "Tallarines verdes",
+              descripcion: "Pasta con albahaca, espinaca y queso fresco, acompañada de bistec a la plancha.",
+              precio: 32,
+              foto: "img/tallarines-verdes.webp",
+              etiqueta: "Nuevo"
+            }
+          ]
+        },
+        {
+          nombre: "Del mar",
+          descripcion: "Frescura, limón y ese toque que nos gusta tanto.",
+          platos: [
+            {
+              nombre: "Ceviche de la casa",
+              descripcion: "Pescado del día, limón, ají limo y culantro. Con camote, choclo y cancha.",
+              precio: 34,
+              foto: "img/ceviche-de-la-casa.webp",
+              etiqueta: "Favorito de la casa"
+            },
+            {
+              nombre: "Arroz con mariscos",
+              descripcion: "Arroz cremoso con mariscos salteados, ají panca y un toque de queso parmesano.",
+              precio: 38,
+              foto: "img/arroz-con-mariscos.webp",
+              etiqueta: ""
+            }
+          ]
+        },
+        {
+          nombre: "Bebidas",
+          descripcion: "El acompañamiento perfecto para tu pedido.",
+          platos: [
+            {
+              nombre: "Chicha morada",
+              descripcion: "Maíz morado, piña, canela y limón. Preparada en casa. Vaso de 400 ml.",
+              precio: 8,
+              foto: "img/chicha-morada.webp",
+              etiqueta: "Casera"
+            },
+            {
+              nombre: "Limonada con hierbabuena",
+              descripcion: "Limón recién exprimido con un toque de hierbabuena. Vaso de 400 ml.",
+              precio: 9,
+              foto: "img/limonada-hierbabuena.webp",
+              etiqueta: ""
+            }
+          ]
+        },
+        {
+          nombre: "Postres",
+          descripcion: "Porque siempre queda espacio para algo dulce.",
+          platos: [
+            {
+              nombre: "Suspiro a la limeña",
+              descripcion: "Manjar suave, merengue ligero y una pizca de canela. Nuestra receta de siempre.",
+              precio: 14,
+              foto: "img/suspiro-a-la-limena.webp",
+              etiqueta: "Más pedido"
+            },
+            {
+              nombre: "Mazamorra morada",
+              descripcion: "Maíz morado con frutas, especias y canela. Un clásico que abraza.",
+              precio: 12,
+              foto: "img/mazamorra-morada.webp",
+              etiqueta: ""
+            }
+          ]
+        }
+      ]
+    };
+    /* FIN DE CONFIG. No necesitas editar nada a partir de aquí. */
+
+    (() => {
+      "use strict";
+      const negocio = CONFIG.negocio;
+      const ui = CONFIG.interfaz;
+      const root = document.documentElement;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const categorias = (Array.isArray(CONFIG.categorias) ? CONFIG.categorias : []).filter(c => c && Array.isArray(c.platos));
+
+      // Se usa textContent para que los nombres y descripciones sean texto seguro.
+      function el(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined && text !== null) node.textContent = String(text);
+        return node;
+      }
+
+      // Solo se aceptan URLs web (o imágenes data:image); no código ejecutable.
+      function validUrl(value, image = false) {
+        if (!value || typeof value !== "string") return "";
+        if (image && /^data:image\/(png|jpeg|jpg|webp|gif|svg\+xml)(?:;|,)/i.test(value)) return value;
+        try {
+          const url = new URL(value, document.baseURI);
+          if (url.protocol === "https:" || url.protocol === "http:") return url.href;
+          // También admite fotos locales si abres este HTML directamente en tu equipo.
+          if (image && url.protocol === "file:" && window.location.protocol === "file:") return url.href;
+        } catch (_) { /* Una URL no válida simplemente no se muestra. */ }
+        return "";
+      }
+
+      function hex(value, fallback) {
+        const short = /^#([0-9a-f]{3})$/i.exec(value);
+        if (short) return "#" + [...short[1]].map(c => c + c).join("");
+        return /^#[0-9a-f]{6}$/i.test(value) ? value : fallback;
+      }
+      function rgb(value) { return [1, 3, 5].map(i => parseInt(value.slice(i, i + 2), 16)); }
+      function mix(a, b, amount) {
+        const x = rgb(a), y = rgb(b);
+        return "#" + x.map((n, i) => Math.round(n * (1 - amount) + y[i] * amount).toString(16).padStart(2, "0")).join("");
+      }
+      function luminance(value) {
+        const c = rgb(value).map(n => {
+          n /= 255;
+          return n <= .04045 ? n / 12.92 : ((n + .055) / 1.055) ** 2.4;
+        });
+        return .2126 * c[0] + .7152 * c[1] + .0722 * c[2];
+      }
+      function contrast(a, b) {
+        const x = luminance(a), y = luminance(b);
+        return (Math.max(x, y) + .05) / (Math.min(x, y) + .05);
+      }
+      function contrastInk(value) {
+        if (contrast("#141B16", value) >= 4.5) return "#141B16";
+        return contrast("#FFFFFF", value) >= 4.5 ? "#FFFFFF" : "#000000";
+      }
+      // Conserva los cuatro colores de marca y ajusta solo sus versiones para texto.
+      // Así un principal pastel no produce letras claras sobre un fondo claro.
+      function readableInk(preferred, backgrounds) {
+        if (backgrounds.every(bg => contrast(preferred, bg) >= 4.5)) return preferred;
+        const candidates = ["#141B16", "#FFFFFF", "#000000"];
+        const target = candidates.sort((a, b) => Math.min(...backgrounds.map(bg => contrast(b, bg))) - Math.min(...backgrounds.map(bg => contrast(a, bg))))[0];
+        for (let step = 1; step <= 100; step++) {
+          const result = mix(preferred, target, step / 100);
+          if (backgrounds.every(bg => contrast(result, bg) >= 4.5)) return result;
+        }
+        return target;
+      }
+      // Mantiene las superficies a un lado del umbral de contraste:
+      // también funciona si el fondo elegido es un gris intermedio.
+      function compatibleSurface(desired, background) {
+        const ink = contrastInk(background);
+        for (let step = 100; step >= 0; step--) {
+          const candidate = mix(background, desired, step / 100);
+          if (contrast(ink, candidate) >= 4.5) return candidate;
+        }
+        return background;
+      }
+
+      const palette = {
+        principal: hex(CONFIG.colores.principal, "#244a3d"),
+        secundario: hex(CONFIG.colores.secundario, "#b65232"),
+        fondo: hex(CONFIG.colores.fondo, "#faf7f0"),
+        texto: hex(CONFIG.colores.texto, "#252d29")
+      };
+      const superficie = compatibleSurface(mix(palette.fondo, "#ffffff", luminance(palette.fondo) > .4 ? .52 : .07), palette.fondo);
+      const suave = compatibleSurface(mix(palette.fondo, palette.principal, .07), palette.fondo);
+      const acentoSuave = compatibleSurface(mix(palette.fondo, palette.secundario, .1), palette.fondo);
+      const backgrounds = [palette.fondo, superficie, suave, acentoSuave];
+      const texto = readableInk(palette.texto, backgrounds);
+      const tokens = {
+        ...palette,
+        texto,
+        "principal-tinta": readableInk(palette.principal, backgrounds),
+        "secundario-tinta": readableInk(palette.secundario, backgrounds),
+        "sobre-principal": contrastInk(palette.principal),
+        "sobre-secundario": contrastInk(palette.secundario),
+        superficie,
+        suave,
+        "acento-suave": acentoSuave,
+        borde: mix(palette.fondo, texto, .15),
+        tenue: readableInk(mix(palette.fondo, texto, .75), backgrounds),
+        fuente: CONFIG.fuentes.texto,
+        "fuente-titulos": CONFIG.fuentes.titulos
+      };
+      Object.entries(tokens).forEach(([key, value]) => root.style.setProperty("--" + key, value));
+      root.lang = String(CONFIG.idioma || "es-PE").split("-")[0];
+      document.title = `${negocio.nombre} · ${ui.carta}`;
+      document.getElementById("theme-color").content = palette.principal;
+      document.getElementById("page-description").content = `${negocio.nombre}. ${negocio.eslogan}`;
+
+      // Iconos propios en SVG. No hay dependencias ni librerías de iconos.
+      const paths = {
+        arrow: '<path d="M5 12h14m-6-6 6 6-6 6"/>',
+        down: '<path d="M12 5v14m-6-6 6 6 6-6"/>',
+        pin: '<path d="M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/>',
+        clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+        search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',
+        close: '<path d="m6 6 12 12M6 18 18 6"/>',
+        star: '<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>',
+        instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8" fill="currentColor" stroke="none"/>',
+        facebook: '<path d="M14 21v-8h3l.5-4H14V7c0-1.1.4-2 2-2h2V1.5c-.6-.1-1.7-.3-3-.3-3 0-5 1.8-5 5.2V9H7v4h3v8"/>',
+        bowl: '<path d="M3 10h18c-.4 6-3.7 9-9 9s-8.6-3-9-9ZM7 22h10M9 6c-2-3 2-3 0-6M15 6c-2-3 2-3 0-6"/>',
+        whatsapp: '<path d="M20.5 11.6a8.5 8.5 0 0 1-12.6 7.5L3 20.5l1.3-4.8A8.5 8.5 0 1 1 20.5 11.6Z"/><path d="M8.6 7.1c.3-.4.7-.3.9.1l.9 1.8c.2.4.1.6-.2.9l-.6.6c.6 1.4 1.6 2.4 3 3l.7-.8c.3-.3.5-.4.9-.2l1.8.9c.4.2.4.6.2.9-.7 1.2-1.6 1.5-2.9 1.1-3.1-.9-5.9-3.6-6.3-5.9-.2-1 .1-1.8.6-2.4Z"/>'
+      };
+      function icon(name) {
+        const box = el("span");
+        box.innerHTML = `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${paths[name] || paths.bowl}</svg>`;
+        return box.firstElementChild;
+      }
+
+      const phone = String(CONFIG.whatsapp || "").replace(/\D/g, "");
+      function waUrl(message) { return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`; }
+      const generalMessage = ui.mensajeGeneral.replace(/\{negocio\}/g, () => negocio.nombre);
+      function externalLink(url, className, label, iconName) {
+        const link = el("a", className);
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        if (iconName) link.append(icon(iconName));
+        if (label) link.append(el("span", "", label));
+        return link;
+      }
+      function waLink(className, label, iconName = "whatsapp", message = generalMessage) {
+        return externalLink(waUrl(message), className, label, iconName);
+      }
+      function socialLinks(className = "") {
+        const container = el("div", className);
+        for (const key of ["instagram", "facebook"]) {
+          const url = validUrl(negocio[key]);
+          if (!url) continue;
+          const link = externalLink(url, "social-link", "", key);
+          link.setAttribute("aria-label", `${ui[key]} · ${negocio.nombre}`);
+          container.append(link);
+        }
+        return container;
+      }
+
+      let money;
+      try {
+        money = new Intl.NumberFormat(CONFIG.idioma, { style: "currency", currency: CONFIG.moneda, minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      } catch (_) {
+        money = new Intl.NumberFormat("es-PE", { style: "currency", currency: "PEN" });
+      }
+      function price(value) { return typeof value === "number" && Number.isFinite(value) && value >= 0 ? money.format(value) : ui.precioConsultar; }
+      function normalize(value) { return String(value || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim(); }
+
+      const app = document.getElementById("app");
+      const skip = el("a", "skip-link", ui.saltarContenido);
+      skip.href = "#carta";
+      app.append(skip);
+
+      const header = el("header", "wrap masthead");
+      const brand = el("a", "brand");
+      brand.href = "#inicio";
+      brand.setAttribute("aria-label", negocio.nombre);
+      const brandMark = el("span", "brand-mark");
+      const initials = String(negocio.nombre || "").trim().split(/\s+/).slice(0, 2).map(word => [...word][0] || "").join("");
+      const fallback = el("span", "brand-initials", initials);
+      fallback.setAttribute("aria-hidden", "true");
+      brandMark.append(fallback);
+      const logoUrl = validUrl(negocio.logo, true);
+      if (logoUrl) {
+        const img = el("img");
+        img.width = 1254;
+        img.height = 1254;
+        img.decoding = "async";
+        img.alt = "";
+        img.src = logoUrl;
+        img.addEventListener("load", () => { fallback.hidden = true; });
+        img.addEventListener("error", () => { img.remove(); fallback.hidden = false; }, { once: true });
+        brandMark.append(img);
+      }
+      const brandWords = el("span");
+      brandWords.append(el("span", "brand-name", negocio.nombre));
+      if (negocio.tipo) brandWords.append(el("span", "brand-note", negocio.tipo));
+      brand.append(brandMark, brandWords);
+      const headerActions = socialLinks("header-actions");
+      headerActions.append(waLink("button header-order", ui.pedirPorWhatsapp));
+      header.append(brand, headerActions);
+      app.append(header);
+
+      const hero = el("section", "wrap hero");
+      hero.id = "inicio";
+      hero.setAttribute("aria-labelledby", "hero-title");
+      const heroContent = el("div");
+      heroContent.append(el("div", "eyebrow", ui.portadaEtiqueta));
+      const heroTitle = el("h1");
+      heroTitle.id = "hero-title";
+      heroTitle.append(document.createTextNode(ui.titulo));
+      if (ui.tituloDestacado) heroTitle.append(el("br"), el("em", "", ui.tituloDestacado));
+      heroContent.append(heroTitle, el("p", "hero-description", negocio.eslogan));
+      const heroActions = el("div", "hero-actions");
+      const browse = el("a", "button", ui.verCarta);
+      browse.href = "#carta";
+      browse.append(icon("down"));
+      heroActions.append(browse);
+      if (negocio.zona) {
+        const location = el("span", "hero-location");
+        location.append(icon("pin"), el("span", "", negocio.zona));
+        heroActions.append(location);
+      }
+      heroContent.append(heroActions);
+
+      const visual = el("div", "hero-visual");
+      // La portada es un archivo de imagen. Si no existe, se oculta su marco.
+      function hideCover() { visual.hidden = true; hero.classList.add("has-no-photo"); }
+      const heroPhotoUrl = validUrl(negocio.fotoPortada, true);
+      if (heroPhotoUrl) {
+        const image = el("img", "hero-photo");
+        image.width = 1536;
+        image.height = 1024;
+        image.fetchPriority = "high";
+        image.alt = String(negocio.fotoPortadaAlt || negocio.nombre);
+        image.decoding = "async";
+        image.src = heroPhotoUrl;
+        image.addEventListener("error", hideCover, { once: true });
+        visual.append(image);
+      } else hideCover();
+      if (ui.portadaDetalle) visual.append(el("span", "hero-corner", ui.portadaDetalle));
+      if (ui.portadaSello) {
+        const seal = el("span", "visual-label");
+        seal.append(icon("bowl"), el("span", "", ui.portadaSello));
+        visual.append(seal);
+      }
+      hero.append(heroContent, visual);
+      app.append(hero);
+
+      const nav = el("nav", "category-nav");
+      nav.setAttribute("aria-label", ui.carta);
+      const navInner = el("div", "wrap nav-inner");
+      const tabs = el("div", "category-tabs");
+      navInner.append(el("span", "nav-label", ui.carta), tabs);
+      nav.append(navInner);
+      app.append(nav);
+
+      const main = el("main", "wrap menu");
+      main.id = "carta";
+      main.tabIndex = -1;
+      const menuHeading = el("div", "menu-heading");
+      const headingText = el("div");
+      headingText.append(el("p", "section-kicker", ui.cartaEtiqueta), el("h2", "", ui.cartaTitulo), el("p", "menu-intro", ui.cartaDescripcion));
+      const searchBox = el("div", "search");
+      const label = el("label", "sr-only", ui.buscar);
+      label.htmlFor = "menu-search";
+      const search = el("input");
+      search.id = "menu-search";
+      search.type = "search";
+      search.placeholder = ui.buscar;
+      search.autocomplete = "off";
+      search.setAttribute("aria-controls", "menu-sections");
+      const clear = el("button", "search-clear");
+      clear.type = "button";
+      clear.setAttribute("aria-label", ui.limpiarBusqueda);
+      clear.append(icon("close"));
+      clear.hidden = true;
+      searchBox.append(label, icon("search"), search, clear);
+      menuHeading.append(headingText, searchBox);
+      main.append(menuHeading);
+      const live = el("p", "sr-only");
+      live.setAttribute("role", "status");
+      live.setAttribute("aria-live", "polite");
+      main.append(live);
+      const sections = el("div");
+      sections.id = "menu-sections";
+      main.append(sections);
+      const records = [];
+
+      categorias.forEach((category, index) => {
+        const id = `categoria-${index + 1}`;
+        const tab = el("button", "category-tab");
+        tab.type = "button";
+        tab.setAttribute("aria-controls", id);
+        tab.setAttribute("aria-current", "false");
+        tab.append(el("span", "", category.nombre));
+        const tabCount = el("span", "tab-count", String(category.platos.length).padStart(2, "0"));
+        tabCount.setAttribute("aria-hidden", "true");
+        tab.append(tabCount);
+        tabs.append(tab);
+
+        const section = el("section", "menu-section");
+        section.id = id;
+        section.setAttribute("aria-labelledby", `${id}-titulo`);
+        const sectionHeading = el("div", "section-heading");
+        const number = el("span", "section-number", String(index + 1).padStart(2, "0"));
+        number.setAttribute("aria-hidden", "true");
+        const categoryTitle = el("h2", "section-title", category.nombre);
+        categoryTitle.id = `${id}-titulo`;
+        sectionHeading.append(number, categoryTitle);
+        section.append(sectionHeading);
+        if (category.descripcion) section.append(el("p", "category-description", category.descripcion));
+        const grid = el("div", "dish-grid");
+        const dishes = category.platos.filter(dish => dish && typeof dish === "object").map(dish => {
+          const article = el("article", "dish");
+          const top = el("div", "dish-top");
+          const info = el("div", "dish-info");
+          if (dish.etiqueta) {
+            const tag = el("span", "dish-tag");
+            tag.append(icon("star"), el("span", "", dish.etiqueta));
+            info.append(tag);
+          }
+          info.append(el("h3", "", dish.nombre));
+          if (dish.descripcion) info.append(el("p", "dish-description", dish.descripcion));
+          top.append(info);
+          const photoUrl = validUrl(dish.foto, true);
+          if (photoUrl) {
+            const image = el("img", "dish-photo");
+            image.width = 1254;
+            image.height = 1254;
+            image.alt = String(dish.nombre || "");
+            image.loading = "lazy";
+            image.decoding = "async";
+            image.addEventListener("error", () => {
+              article.classList.add("has-photo-error");
+              image.remove();
+              queueScrollUpdate();
+            }, { once: true });
+            image.src = photoUrl;
+            top.append(image);
+          }
+          const footer = el("div", "dish-footer");
+          const message = ui.mensajePlato.replace(/\{plato\}/g, () => String(dish.nombre || ""));
+          const order = waLink("dish-order", ui.pedir, "arrow", message);
+          order.setAttribute("aria-label", `${ui.pedir}: ${dish.nombre}`);
+          footer.append(el("span", "dish-price", price(dish.precio)), order);
+          article.append(top, footer);
+          grid.append(article);
+          return { element: article, searchable: normalize(`${dish.nombre} ${dish.descripcion || ""} ${dish.etiqueta || ""} ${category.nombre}`) };
+        });
+        section.append(grid);
+        sections.append(section);
+        const record = { section, tab, tabCount, dishes };
+        records.push(record);
+        tab.addEventListener("click", () => {
+          setActive(record, true);
+          const target = window.scrollY + section.getBoundingClientRect().top - nav.getBoundingClientRect().height - 18;
+          window.scrollTo({ top: Math.max(0, target), behavior: reducedMotion.matches ? "auto" : "smooth" });
+        });
+      });
+
+      const empty = el("div", "empty-state");
+      empty.append(icon("bowl"), el("h3", "", ui.sinResultadosTitulo), el("p", "", ui.sinResultadosDescripcion));
+      const resetButton = el("button", "button", ui.mostrarCarta);
+      resetButton.type = "button";
+      empty.append(resetButton);
+      empty.hidden = true;
+      main.append(empty);
+      if (!records.some(record => record.dishes.length)) {
+        main.append(el("p", "notice", ui.cartaVacia));
+        nav.hidden = true;
+        searchBox.hidden = true;
+      }
+      app.append(main);
+
+      const contact = el("section", "wrap contact");
+      contact.setAttribute("aria-labelledby", "contact-title");
+      const contactText = el("div");
+      const contactTitle = el("h2", "", ui.contactoTitulo);
+      contactTitle.id = "contact-title";
+      contactText.append(contactTitle, el("p", "contact-intro", ui.contactoDescripcion), waLink("contact-link", ui.contactoBoton));
+      const details = el("div", "contact-details");
+      if (negocio.horario) {
+        const detail = el("div", "detail");
+        const text = el("div");
+        text.append(el("h3", "", ui.horarioTitulo), el("p", "", negocio.horario));
+        detail.append(icon("clock"), text);
+        details.append(detail);
+      }
+      if (negocio.direccion) {
+        const detail = el("div", "detail");
+        const text = el("div");
+        const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(negocio.direccion)}`;
+        text.append(el("h3", "", ui.direccionTitulo), externalLink(mapUrl, "", negocio.direccion));
+        detail.append(icon("pin"), text);
+        details.append(detail);
+      }
+      contact.append(contactText, details);
+      app.append(contact);
+
+      const footer = el("footer", "wrap footer");
+      const footerText = el("div");
+      footerText.append(el("div", "footer-name", negocio.nombre), el("p", "", ui.pie));
+      footer.append(footerText, socialLinks("footer-socials"));
+      app.append(footer);
+      const floating = waLink("wa-float", ui.whatsappFlotante);
+      floating.setAttribute("aria-label", ui.pedirPorWhatsapp);
+      app.append(floating);
+
+      let current = null;
+      function setActive(record, reveal = false) {
+        if (!record) return;
+        if (current !== record) records.forEach(item => item.tab.setAttribute("aria-current", item === record ? "true" : "false"));
+        current = record;
+        // Desplaza solamente la fila horizontal, sin mover la página verticalmente.
+        if (reveal) {
+          const rect = record.tab.getBoundingClientRect();
+          const track = tabs.getBoundingClientRect();
+          if (rect.left < track.left || rect.right > track.right) {
+            tabs.scrollTo({ left: tabs.scrollLeft + rect.left - track.left - (track.width - rect.width) / 2, behavior: reducedMotion.matches ? "auto" : "smooth" });
+          }
+        }
+      }
+      function updateActiveFromScroll() {
+        const visible = records.filter(record => !record.section.hidden);
+        if (!visible.length) return;
+        const threshold = nav.getBoundingClientRect().height + 32;
+        let active = visible[0];
+        for (const record of visible) {
+          if (record.section.getBoundingClientRect().top <= threshold) active = record;
+          else break;
+        }
+        setActive(active, true);
+      }
+      let frame = 0;
+      function queueScrollUpdate() {
+        if (frame) return;
+        frame = requestAnimationFrame(() => { frame = 0; updateActiveFromScroll(); });
+      }
+      window.addEventListener("scroll", queueScrollUpdate, { passive: true });
+      window.addEventListener("resize", queueScrollUpdate, { passive: true });
+      function measureNav() { root.style.setProperty("--nav-height", `${nav.hidden ? 0 : nav.getBoundingClientRect().height}px`); }
+      if ("ResizeObserver" in window) new ResizeObserver(measureNav).observe(nav);
+      else window.addEventListener("resize", measureNav, { passive: true });
+
+      function filterMenu() {
+        const words = normalize(search.value).split(/\s+/).filter(Boolean);
+        let count = 0;
+        records.forEach(record => {
+          let categoryCount = 0;
+          record.dishes.forEach(dish => {
+            const matches = words.every(word => dish.searchable.includes(word));
+            dish.element.hidden = !matches;
+            if (matches) categoryCount++;
+          });
+          record.section.hidden = categoryCount === 0;
+          record.tab.hidden = categoryCount === 0;
+          record.tabCount.textContent = String(categoryCount).padStart(2, "0");
+          count += categoryCount;
+        });
+        clear.hidden = !search.value;
+        empty.hidden = count > 0 || words.length === 0;
+        live.textContent = words.length ? `${count} ${count === 1 ? ui.resultadoSingular : ui.resultadoPlural}` : "";
+        if (!count) {
+          records.forEach(record => record.tab.setAttribute("aria-current", "false"));
+          current = null;
+        } else updateActiveFromScroll();
+      }
+      function resetSearch() { search.value = ""; filterMenu(); search.focus({ preventScroll: true }); }
+      search.addEventListener("input", filterMenu);
+      clear.addEventListener("click", resetSearch);
+      resetButton.addEventListener("click", resetSearch);
+
+      measureNav();
+      filterMenu();
+      updateActiveFromScroll();
+    })();
+  </script>
+</body>
+</html>

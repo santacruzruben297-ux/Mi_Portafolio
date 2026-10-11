@@ -1,0 +1,32 @@
+REVISIÓN DE CASA CRIOLLA
+
+Corregido:
+- Archivo index.html de entrada para abrir la carta desde la raíz.
+- Buscador de 16 px para evitar el zoom automático en iPhone.
+- Controles de búsqueda y redes con áreas táctiles de 44 x 44 px.
+- Encabezado flexible para nombres largos y pantallas estrechas.
+- Texto legible con paletas pastel, claras, oscuras y grises medios.
+- Sello de portada debajo de la foto, sin cubrirla.
+- La categoría activa vuelve a aparecer en la fila horizontal.
+- Dimensiones de imágenes, carga diferida y prioridad para la portada.
+- Categorías ausentes o platos vacíos no detienen la generación.
+
+Verificado:
+- 14 imágenes enlazadas, presentes y decodificables.
+- 12 platos y 5 categorías generados exclusivamente desde CONFIG.
+- Precios en soles y mensajes exactos, incluidos caracteres especiales.
+- Búsqueda, categorías, estados vacíos y recuperación cuando falla una foto.
+- Contraste de texto de al menos 4.5:1 en cinco paletas de prueba.
+- CSS y JavaScript internos, sin librerías ni fotos de internet.
+
+Límite de la verificación:
+Se ejecutaron pruebas funcionales con un adaptador de DOM y comprobaciones
+de archivos. La revisión visual en un navegador real queda pendiente.
+Revisa el resultado desde un celular antes de entregarlo a un cliente.
+
+El WhatsApp utiliza el contacto de Rubén: +51 923 602 215.
+La dirección y los perfiles de Casa Criolla son ejemplos. Sustituye todos los
+datos por los del cliente antes de usar la carta comercialmente.
+
+Se retiró el plato ilustrado con código y se integró una portada fotográfica
+nueva generada con IA. La foto y su descripción se cambian desde CONFIG.

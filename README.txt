@@ -1,73 +1,41 @@
-PORTAFOLIO — RUBÉN SANTA CRUZ (Diseñador Web / UI-UX)
-========================================================
+# Portafolio de Rubén Santa Cruz
 
-Estructura:
-  index.html       toda la página principal (una sola vista, con anclas por sección)
-  css/style.css    única hoja de estilos, con variables de tema (claro/oscuro)
-  js/script.js     JavaScript puro, sin librerías, organizado en funciones
-  images/          favicon (las miniaturas de los 3 proyectos ahora son
-                    fotografías reales cargadas desde Unsplash — ver abajo)
-  proyectos/       3 proyectos REALES y funcionales, cada uno en su propia
-                    carpeta con un index.html autocontenido (HTML+CSS+JS):
-      nova-coffee/    cafetería — menú por categorías, pedido en vivo con
-                      total calculado, estado abierto/cerrado en tiempo real
-                      y formulario de reserva de mesa con validación
-      fitlife-app/    app de fitness — mockup de teléfono con registro de
-                      entrenamientos, cálculo de calorías, historial editable,
-                      meta semanal y gráfico de progreso (todo con localStorage)
-      techstore/      e-commerce — catálogo con buscador, filtro por
-                      categoría y orden por precio, más un carrito real con
-                      cantidades, envío gratis por monto y checkout simulado
+Abre `index.html` o publica el contenido de esta carpeta en un alojamiento de sitios estáticos. Conserva las carpetas `img/` y `proyectos/`; están incluidas todas las imágenes. No necesita instalar dependencias.
 
-Cómo verlo:
-  Simplemente abre index.html en el navegador. También puedes usar la
-  extensión "Live Server" de VS Code (clic derecho sobre index.html ->
-  "Open with Live Server") para que el modo responsive se vea mejor.
+## Qué incluye
 
-Cómo personalizarlo:
-  - Textos: todo el copy está directo en index.html, en español.
-  - Colores: al inicio de css/style.css, dentro de :root, están las
-    variables --paper (fondo) e --ink (texto/líneas). El único color
-    que aparece en la página principal es el de los tres proyectos
-    reales del portafolio (--nova, --fit, --tech): son exactamente
-    los mismos hex que el acento de cada proyecto dentro de
-    proyectos/, así que si cambias la paleta de un proyecto, actualiza
-    también su variable aquí para que sigan coincidiendo. Esa franja
-    de swatches junto al logo y en el hero es la firma visual del
-    sitio — no es un color de marca inventado, es el resumen del
-    propio trabajo.
-  - Proyectos del portafolio: cada tarjeta tiene dos acciones. El botón
-    "Ver proyecto en vivo" abre el proyecto real en proyectos/<nombre>/
-    (una página aparte, funcional de verdad). El enlace "Ver caso de
-    estudio" abre el modal con el resumen del proceso de diseño; ese
-    texto vive en el objeto PROJECTS al inicio de js/script.js. Para
-    agregar un cuarto proyecto: crea proyectos/<nombre>/index.html,
-    agrega su entrada en PROJECTS y un nuevo <article class="project-row">
-    en el HTML con el mismo data-project y el href hacia su carpeta.
+- Portafolio con tu logo original, cinco proyectos, filtros, casos, tema oscuro y contacto por WhatsApp o correo.
+- Casa Criolla: 12 platos, 5 categorías, búsqueda y pedidos por WhatsApp.
+- Dulce Antojo: 16 productos, 4 categorías y variantes con precios y mensajes de pedido.
+- Nova Coffee: identidad cálida, 6 productos, favoritos, tipos de leche con recargos, notas, repetición del último pedido y reservas cancelables.
+- TechStore: identidad azul y oscura, fichas de producto, favoritos, comparación de hasta 3 productos, carrito y compra simulada. Prueba el código `RUBEN10`.
+- FitLife: identidad verde y lima, sesiones editables con notas, calendario, racha, metas de minutos y sesiones, rutinas propias, temporizador y descarga CSV.
 
-Funciones incluidas:
-  - Modo claro / oscuro con memoria (localStorage)
-  - Menú móvil tipo hamburguesa
-  - Resaltado automático del ítem de menú según la sección visible
-  - Botón "volver arriba"
-  - Modal con el detalle de cada proyecto
-  - Formulario de contacto con validación (nombre, correo, mensaje)
-    — no envía a un servidor real; para conectarlo a uno, se reemplaza
-    el bloque marcado en initContactForm() por una llamada fetch().
+## Personalizar CONFIG
 
-Imágenes de los proyectos: cada miniatura es ahora una fotografía real
-en alta resolución (Unsplash, licencia gratuita para uso personal y
-comercial, sin atribución obligatoria), elegida para representar el
-rubro de cada proyecto — barra de cafetería para Nova Coffee, alguien
-entrenando con smartwatch para FitLife, y una composición de gadgets
-para TechStore. Se cargan directo desde images.unsplash.com (no hace
-falta guardar el archivo localmente), llevan loading="lazy" para no
-frenar la carga inicial, y un pequeño crédito al fotógrafo aparece al
-pasar el cursor sobre la imagen (buena práctica aunque la licencia no
-lo exija). El marco de cada miniatura conserva un borde inferior con
-el color real del proyecto (--nova/--fit/--tech), para que la firma
-de color del sitio se mantenga incluso con fotos reales.
+| Proyecto | Archivo que contiene CONFIG |
+| --- | --- |
+| Portafolio | `index.html`, al inicio del script interno |
+| Casa Criolla | `proyectos/casa-criolla/carta-digital.html` |
+| Dulce Antojo | `proyectos/dulce-antojo/catalogo-dulce-antojo.html` |
+| Nova Coffee | `proyectos/nova-coffee/app.js`, al inicio |
+| TechStore | `proyectos/techstore/app.js`, al inicio |
+| FitLife | `proyectos/fitlife-app/app.js`, al inicio |
 
-Cuando tengas capturas de tu propio trabajo (o de un cliente real),
-lo ideal es reemplazar el src de cada <img> por una captura de
-pantalla del proyecto real en vez de una foto genérica de stock.
+Edita los nombres, logos, portadas, colores y datos disponibles en cada CONFIG. Los precios se escriben como números en soles, sin `S/`. Los comentarios del código están en español. Las rutas de las demos se interpretan desde su `index.html`, por eso las imágenes comunes empiezan por `../../img/`.
+
+El CV está vacío: añade tu PDF real y cambia `CONFIG.perfil.cv` para mostrar el botón. No se ha inventado un historial profesional.
+
+## Imágenes completas
+
+Las fotos y logos usan `object-fit: contain` o su proporción natural. No se aplica zoom al pasar el cursor y las etiquetas de la carta, el estudio y las tarjetas no tapan la fotografía. Las portadas no usan ilustraciones hechas con código; Casa Criolla incluye una portada nueva generada con IA. Cuando se deja una portada vacía o falla su carga, la carta oculta su marco. Los diseños cambian de columnas según el espacio disponible.
+
+`ARCHIVOS-IMAGENES.txt` enumera las 50 imágenes del paquete. `PROMPTS-IMAGENES.txt` conserva los prompts de generación y los nombres finales.
+
+## Datos y demostraciones
+
+Nova Coffee y TechStore simulan pedidos y compras: no cobran ni contactan a un comercio. FitLife no guarda sesiones automáticamente al terminar el temporizador; prepara el formulario para que el visitante confirme el registro. Las demos guardan datos en el navegador y funcionan durante la visita aunque se bloquee el almacenamiento.
+
+Todos los contactos de WhatsApp del portafolio y sus cinco proyectos usan +51 923 602 215 (`51923602215`). Cambia el teléfono desde `CONFIG.perfil.whatsapp` en el portafolio o `CONFIG.whatsapp` en cada demo al adaptar el proyecto a un cliente. Casa Criolla y Dulce Antojo preparan mensajes de pedido; Nova Coffee, TechStore y FitLife incluyen un enlace de contacto en el pie de página. Los tres proyectos Nova, FitLife y TechStore se construyeron como demos funcionales a partir de sus descripciones en el portafolio original.
+
+La guía `GUIA-CLIENTES.md` explica cómo adaptar una carta, colocar fotos y publicarla. Consulta `VERIFICACION.txt` para conocer qué se verificó y qué revisión visual queda pendiente.

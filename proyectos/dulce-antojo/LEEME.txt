@@ -1,0 +1,54 @@
+DULCE ANTOJO — PROYECTO CON TODAS LAS IMÁGENES
+
+CÓMO VER EL CATÁLOGO COMPLETO
+1. Descarga dulce-antojo-completo.zip y extrae todo su contenido.
+2. Dentro de la carpeta dulce-antojo, abre catalogo-dulce-antojo.html en Chrome,
+   Edge, Firefox o Safari.
+3. Conserva img/ junto al HTML: incluye el logo, la portada y las 16 fotos.
+   El HTML del ZIP carga estas imágenes locales y pesa aproximadamente 57 KB.
+
+La descarga HTML independiente entregada anteriormente es otra presentación:
+contiene las imágenes incrustadas y pesa aproximadamente 49 MB.
+Este ZIP usa las mismas imágenes originales como archivos separados.
+
+PERSONALIZACIÓN
+Busca const CONFIG al inicio del JavaScript del HTML. Cambia únicamente ese bloque:
+nombre, eslogan, logo, WhatsApp, colores, horario, dirección, redes sociales,
+portada, textos, categorías y productos. CSS y JavaScript están en el mismo HTML.
+WhatsApp de contacto: +51 923 602 215 (CONFIG.whatsapp: 51923602215).
+Cambia este número en CONFIG y los perfiles ficticios al adaptar la tienda.
+Los precios son números en soles, por ejemplo 65 o 65.50, sin escribir S/.
+La propiedad foto usa un nombre exacto, por ejemplo img/torta-chocolate.webp.
+Para ocultar una foto o una red social, usa una cadena vacía: "".
+
+VARIANTES OPCIONALES
+variantes: ["Pequeña", "Mediana", "Grande"] conserva el precio base.
+variantes: [{ nombre: "Pequeña", precio: 65 }, { nombre: "Grande", precio: 135 }]
+actualiza el precio según la opción seleccionada.
+El mensaje de WhatsApp empieza con: Hola, quiero pedir: [producto].
+Si hay variantes, añade: Variante: [opción elegida].
+
+PUBLICACIÓN
+Sube el HTML y la carpeta img/ conservando los nombres y su ubicación.
+No necesitas librerías ni fuentes externas. Todas las imágenes fueron generadas
+con IA para esta tienda ficticia; se conservan sus PNG originales.
+
+IMÁGENES INCLUIDAS EN img/
+logo-dulce-antojo.webp
+portada-dulce-antojo.webp
+torta-chocolate.webp
+torta-vainilla-fresas.webp
+torta-red-velvet.webp
+torta-zanahoria.webp
+cupcake-chocolate.webp
+cupcake-vainilla.webp
+cupcake-fresa.webp
+cupcake-limon.webp
+cookies-chispas.webp
+galletas-avena.webp
+alfajores-artesanales.webp
+galletas-mantequilla.webp
+cheesecake-frutos-rojos.webp
+mousse-chocolate.webp
+tres-leches-vasito.webp
+panna-cotta-maracuya.webp

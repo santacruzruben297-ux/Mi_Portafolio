@@ -1,0 +1,88 @@
+Imágenes originales generadas con la herramienta integrada de IA.
+Archivos usados sin cambios en la composición.
+
+estudio-diseno.png
+Create a premium editorial photograph for the hero of a Peruvian independent web and UI designer's portfolio. Landscape 3:2 composition. A beautiful quiet creative desk, pale warm stone table, small matte off-white architectural objects, folded sage-green and chartreuse color swatches, open cream notebook with simple abstract charcoal grid sketches (no readable writing), brushed aluminum laptop half closed with no visible screen, small coffee cup, one fine charcoal pencil. Strong asymmetrical composition concentrated on right, nuanced natural side sunlight, soft shadows, olive and deep charcoal accents, tasteful fine-grain photography, realistic materials, high-end design magazine art direction. No people, no logos, no letters, no brand marks, no website screenshots, no watermarks. Subject crisp, clean spacious background.
+
+nova-coffee.png
+Original photorealistic editorial brand photograph for a fictional independent cafe called Nova Coffee, no text in the image. Landscape 3:2. In a warm minimalist cafe, one beautiful ivory ceramic cup of flat white with precise fern latte art and one fresh golden croissant on a small stoneware plate in foreground, polished dark walnut table, softly blurred warm oak cafe counter and natural cream plaster walls in background. Morning side window light, honest rich coffee texture, warm beige and caramel colors with deep brown. Premium natural food photography, 50mm lens, eye-level oblique view, composed with breathing room, appetizing, highly realistic. No people, no logos, no lettering, no known brands, no watermarks.
+
+fitlife-app.png
+Generate an original realistic editorial still-life photograph for a fictional workout-tracking web app called FitLife; no text. Landscape 3:2. Charcoal kettlebell, rolled burnt-orange exercise mat, folded ivory cotton towel and one minimal unbranded stainless steel water bottle on pale warm grey studio floor. Gentle natural light from tall side window, refined clean minimal composition, attractive diagonal spacing, charcoal and burnt orange accents, tactile materials, crisp product photography, unobstructed whole objects, overhead oblique angle. No people, no logos, no words, no screens, no health claims, no watermarks, no recognizable brands.
+
+techstore.png
+Original photorealistic high-end product still life for a fictional technology e-commerce demo named TechStore. Landscape 3:2 composition. A pair of beautiful generic over-ear wireless headphones in matte graphite, a slim unbranded silver laptop slightly closed, a small rectangular charcoal portable speaker and a minimal compact dark keyboard, thoughtfully spaced on warm light-grey stone tabletop. Restrained sage-green backdrop accent, large soft natural side window light, precise material realism and gentle shadows, premium editorial technology photography, slightly elevated front angle. No text, no recognizable commercial brands, no brand marks, no logos, no watermarks, no screen UI, realistic plausible shapes.
+
+tech-audifonos.png
+Original photorealistic catalogue product photograph for a fictional technology store, A single pair of generic unbranded matte graphite over-ear wireless headphones, elegant rounded ear cups, upright in three-quarter front view. Centered whole object isolated naturally on a pale warm grey stone surface and very light neutral background. Natural soft side window lighting, realistic premium materials, subtle sage accent only in background, soft grounded shadow. Square composition with generous clean space all around. No commercial brands, logos, brand marks, text, watermarks, people, props or other products.
+
+tech-laptop.png
+Original photorealistic catalogue product photograph for a fictional technology store, A single generic unbranded silver slim laptop, open at a realistic angle, black keyboard, screen showing only a plain muted sage background, no interface. Centered whole object isolated naturally on a pale warm grey stone surface and very light neutral background. Natural soft side window lighting, realistic premium materials, subtle sage accent only in background, soft grounded shadow. Square composition with generous clean space all around. No commercial brands, logos, brand marks, text, watermarks, people, props or other products.
+
+tech-teclado.png
+Original photorealistic catalogue product photograph for a fictional technology store, A single compact generic unbranded matte charcoal keyboard, clean rounded keys, elevated front view, plain keys without lettering. Centered whole object isolated naturally on a pale warm grey stone surface and very light neutral background. Natural soft side window lighting, realistic premium materials, subtle sage accent only in background, soft grounded shadow. Square composition with generous clean space all around. No commercial brands, logos, brand marks, text, watermarks, people, props or other products.
+
+tech-parlante.png
+Original photorealistic catalogue product photograph for a fictional technology store, A single small generic unbranded matte charcoal rectangular wireless portable speaker with black fabric grille and subtle round control buttons, front three-quarter view. Centered whole object isolated naturally on a pale warm grey stone surface and very light neutral background. Natural soft side window lighting, realistic premium materials, subtle sage accent only in background, soft grounded shadow. Square composition with generous clean space all around. No commercial brands, logos, brand marks, text, watermarks, people, props or other products.
+
+nova-espresso.png
+Original photorealistic food product photograph for a fictional independent cafe. One small ivory ceramic espresso cup containing fresh dark espresso with rich crema on a matching saucer, eye-level close oblique view. On a simple dark walnut cafe tabletop with softly blurred cream plaster backdrop. Warm natural morning window light, high-end editorial food photography, honest natural texture, gentle shadows, square composition, whole item framed with breathing room, slightly elevated front angle. No lettering, logos, known brands, watermarks, people, hands or other food products.
+
+nova-flat-white.png
+Original photorealistic food product photograph for a fictional independent cafe. One beautiful ivory ceramic cup of flat white, precise fern latte art, on a matching saucer, close elevated angle. On a simple dark walnut cafe tabletop with softly blurred cream plaster backdrop. Warm natural morning window light, high-end editorial food photography, honest natural texture, gentle shadows, square composition, whole item framed with breathing room, slightly elevated front angle. No lettering, logos, known brands, watermarks, people, hands or other food products.
+
+nova-cold-brew.png
+Original photorealistic food product photograph for a fictional independent cafe. One elegant clear glass of dark amber cold brew coffee with clear ice cubes, soft condensation on the glass, no straw, eye-level close photograph. On a simple dark walnut cafe tabletop with softly blurred cream plaster backdrop. Warm natural morning window light, high-end editorial food photography, honest natural texture, gentle shadows, square composition, whole item framed with breathing room, slightly elevated front angle. No lettering, logos, known brands, watermarks, people, hands or other food products.
+
+nova-croissant.png
+Original photorealistic food product photograph for a fictional independent cafe. One fresh artisanal golden croissant with perfectly flaky pastry layers on a small off-white stoneware plate, close oblique overhead photograph. On a simple dark walnut cafe tabletop with softly blurred cream plaster backdrop. Warm natural morning window light, high-end editorial food photography, honest natural texture, gentle shadows, square composition, whole item framed with breathing room, slightly elevated front angle. No lettering, logos, known brands, watermarks, people, hands or other food products.
+
+Cada nombre .png se entrega con el mismo nombre base y extensión .webp, sin pérdida. Los prompts de Casa Criolla están dentro de su carpeta.
+
+
+ACTUALIZACIÓN: LOGOS Y DISEÑOS NUEVOS
+Se utilizó la herramienta de generación de imágenes integrada. Los logos conservan su transparencia. Las fotos se optimizaron en WebP de alta calidad, conservando dimensiones y encuadre. Las portadas previas de Nova, FitLife y TechStore fueron sustituidas.
+
+Archivo utilizado: img/logo-ruben.png
+Prompt final:
+Use case: logo-brand. Asset type: original portfolio logo for Rubén Santa Cruz, independent Peruvian web designer. Create one refined bespoke monogram formed from the letters R and S in a single interlocking architectural stroke, with an elegant balanced rhythm and a subtle negative-space cursor corner. Flat solid deep forest green #183F34, one small warm bronze accent #AD8257. Confident minimal identity, clean geometric edges, legible at 48 pixels, compact centered square composition with modest breathing room. Truly transparent background. Only the monogram RS, no words, no frame, no gradients, no shadows, no mockup, no existing brand logo, no watermark. This is the actual final logo asset.
+
+Archivo utilizado: img/logo-nova-coffee.png
+Prompt final:
+Use case: logo-brand. Asset type: original brand symbol for fictional Nova Coffee café. Create one original compact logo combining a graceful coffee bean and a small four-point nova star through clever negative space, warm modern artisanal character. Flat solid espresso brown #4B2C20 with a small terracotta #C6603E accent. Clean bold contour, friendly proportions, legible at 48 pixels. Compact centered square composition with modest breathing room. Truly transparent background. Symbol only, no letters, no words, no circular badge, no shadows, no gradients, no mockup, no existing brand logos, no watermark.
+
+Archivo utilizado: img/logo-techstore.png
+Prompt final:
+Use case: logo-brand. Asset type: original brand symbol for fictional TechStore technology shop. Create one distinct sharp geometric emblem, an abstract letter T formed from two interlocking isometric facets suggesting a small digital cube, with a clever open negative-space corner. Electric blue #2563EB and deeper blue #183B96, flat solid color shapes. Premium contemporary technology identity, assertive and clear at 48 pixels. Centered compact square composition with modest breathing room. Truly transparent background. Emblem only, no words, no slogans, no additional text, no 3D lighting or shadows, no mockup, no existing brand logos, no watermark.
+
+Archivo utilizado: img/logo-fitlife.png
+Prompt final:
+Use case: logo-brand. Asset type: original brand symbol for fictional FitLife activity journal app. Create one original fluid symbol combining an abstract F shape and an ascending motion path, energetic but calm, rounded sturdy edges. Flat solid dark emerald #087F5B with a fresh lime #B8F06A small accent. A simple balanced mark that remains legible at 48 pixels. Centered compact square composition with modest breathing room. Truly transparent background. Symbol only, no words, no numbers, no heart ECG symbol, no gradients or shadows, no mockup, no known sport brand logos, no watermark.
+
+Archivo utilizado: img/nova-portada-v2.webp
+Prompt final:
+Use case: photorealistic-natural. Asset type: hero photograph for fictional Nova Coffee café website in Peru. A naturally lit intimate artisanal café moment: on a warm travertine table, a complete ceramic terracotta cup and saucer with latte art, a complete golden croissant on a small plate, and a small glass vase; soft sunlit café interior blurred behind, warm cream walls and rust linen. Editorial authentic food photography, subtle natural imperfections, warm inviting light. Landscape 3:2 composition, all foreground objects fully visible with generous clear margins on every side, no crop of cup, plates or food. Do not include people, labels, any text, watermarks, or existing logos.
+
+Archivo utilizado: img/techstore-portada-v2.webp
+Prompt final:
+Use case: product-mockup. Asset type: hero photograph for fictional TechStore technology website. A premium unbranded work setup: a complete slim silver laptop with abstract blue wallpaper, complete graphite headphones, complete compact pale keyboard and complete cylindrical portable speaker, arranged on a cool pale studio surface with subtle electric blue light accents, clean dark navy gradient backdrop. Highly realistic premium product photography, physically plausible devices without brand marks. Landscape 3:2 composition, every device entirely visible with generous safe margins and no overlaps hiding their main forms. No text, no UI labels, no watermark, no known logos.
+
+Archivo utilizado: img/fitlife-portada-v2.webp
+Prompt final:
+Use case: stylized-concept. Asset type: original hero illustration for fictional FitLife personal activity journal app. Sophisticated tactile soft 3D still life: a complete emerald water bottle, a pair of small rounded pale lime dumbbells, a neatly rolled mint exercise mat, and a simple ivory analog stopwatch, floating slightly above an ivory platform. Friendly clean emerald, sage and lime palette, studio light and very soft natural shadows, calm optimistic editorial design. Landscape 3:2 composition, all individual objects fully visible, generous clear margins on all sides, no clipped objects. No people, no text, no numeric labels, no known brands, no watermark, no fake app screen.
+
+Archivo utilizado: img/nova-matcha.webp
+Prompt final:
+Use case: product-mockup. Asset type: product photograph for fictional café Nova Coffee. A single handmade ivory ceramic cup and saucer containing a creamy pale green matcha latte with delicate white latte art. Warm very pale cream tabletop and uncluttered off-white background, soft natural window light, extremely realistic food photography, slight front three-quarter view. Square composition, the entire cup, handle and saucer fully visible with clear breathing room on every side. No other products, no people, no words, no labels, no watermark, no known logos.
+
+Archivo utilizado: img/nova-brownie.webp
+Prompt final:
+Use case: product-mockup. Asset type: product photograph for fictional café Nova Coffee. One generous square piece of moist dark chocolate brownie, a subtle glossy crackled top and a few visible chocolate chunks, served on a small handmade ivory ceramic plate. Warm very pale cream tabletop and off-white uncluttered background, soft natural window light, extremely realistic food photography, three-quarter front view. Square composition, the entire brownie and plate fully visible with clear breathing room around all edges. No text, no people, no labels, no watermark, no known logos.
+
+OPTIMIZACIÓN FINAL: 44 fotografías codificadas en WebP de alta calidad. No se recortaron ni cambiaron sus dimensiones. Los originales generados permanecen en el historial de trabajo.
+
+PORTADA NUEVA DE CASA CRIOLLA · VERSIÓN 2
+Herramienta: generación de imágenes integrada, sin CLI ni imágenes de internet.
+Archivo final: proyectos/casa-criolla/img/portada-casa-criolla-v2.webp
+Prompt: fotografía editorial gastronómica realista horizontal 3:2. Sobre mesa de piedra beige clara, plato cerámico completo de lomo saltado peruano con res, cebolla morada, tomate, papas fritas y arroz blanco; detrás, causa limeña pequeña y vaso de chicha morada. Vista de tres cuartos, luz natural suave de ventana, vajilla artesanal y servilleta terracota. Tonos marfil, verde salvia y terracota. Todos los platos y el vaso completos dentro del encuadre, con margen alrededor. Sin personas, textos, marcas, logos, dibujos ni estilo ilustración. Una foto, sin collage.
+Optimización: WebP calidad 90, conservando las dimensiones 1536 x 1024 y el encuadre. Reemplaza la portada previa. La ilustración SVG de comida fue eliminada del código.

@@ -1,0 +1,34 @@
+VERIFICACIÓN DE LA ACTUALIZACIÓN
+
+Se comprobaron 8 archivos HTML, enlaces locales, IDs únicos y sintaxis de los scripts. Se decodificaron las 50 imágenes finales. Los 4 logos PNG conservan transparencia. Las 44 fotos WebP se optimizaron conservando las dimensiones y el encuadre de sus originales. No hay imágenes de internet ni librerías externas.
+
+Pruebas funcionales con adaptadores DOM:
+- Portafolio: 5 tarjetas y 5 logos de proyecto, casos y logo personal.
+- Nova: 6 productos, leche y recargos, favoritos, búsqueda, notas, repetición de pedidos, reservas y cancelación. Una hora pasada no puede reservarse.
+- TechStore: búsqueda sin tildes, favoritos, detalles, comparación limitada a 3 productos, descuentos y compra de prueba con dirección requerida al elegir entrega. Ejemplo verificado: S/3198.00 menos 10% más S/10 de entrega = S/2888.20.
+- FitLife: registrar, editar, eliminar y restaurar; calendario y metas; rutinas; temporizador con pausa, reanudación y cambio de ronda; descarga CSV y recuperación de datos guardados.
+- Casa Criolla: 12 platos, 5 categorías, mensajes de WhatsApp, fotos opcionales y contraste en 5 paletas.
+- Dulce Antojo: 16 productos, 4 categorías, 11 productos con variantes, precios y mensajes de WhatsApp.
+
+Estilos: se comprobaron delimitadores CSS equilibrados, ausencia de object-fit: cover, controles de formulario de 16 px, rejillas adaptables y preferencia de movimiento reducido.
+
+LÍMITE: no se realizó una revisión visual en un navegador ni en dispositivos físicos. Los adaptadores DOM no renderizan CSS. Queda pendiente comprobar visualmente la composición y navegación en un celular real y en PC.
+
+ACTUALIZACIÓN DE CONTACTOS Y BOTONES
+
+Todos los enlaces de WhatsApp del portafolio y sus cinco demos usan +51 923 602 215 (51923602215). El teléfono se cambia desde CONFIG. Se comprobaron los mensajes de pedidos, variantes, consultas y el borrador del formulario. No quedan teléfonos de ejemplo en este paquete.
+
+Eliminar tiene papelera, ancho propio para la etiqueta, superficie táctil mínima de 44 px, estados de cursor y foco, y colores adaptados al carrito oscuro. Los controles de cantidad pueden pasar a otra línea en pantallas estrechas. Se verificó que solo se elimina el producto elegido, se actualiza el total y se devuelve el foco a un control disponible. También se comprobaron la eliminación de rutinas y la eliminación/restauración de sesiones. La revisión visual en navegador continúa pendiente.
+
+REVISIÓN FINAL DE PORTADAS Y CÓDIGO
+
+- Retirada la ilustración SVG del plato que aún aparecía encima de la foto de Casa Criolla y sus reglas CSS. Las portadas ya no añaden dibujos de comida ni anillos decorativos.
+- Portada nueva generada con IA: proyectos/casa-criolla/img/portada-casa-criolla-v2.webp, 1536 x 1024. Integrada en la carta, tarjeta y caso de estudio. Conserva el encuadre completo.
+- Casa Criolla y Dulce Antojo ocultan el marco de la portada cuando no hay foto o falla su carga. El texto ocupa el espacio disponible.
+- Las tarjetas de Nova y TechStore tienen un estado de texto limpio si falta una imagen. Las portadas fallidas de las tres demos se ocultan.
+- El sello del estudio ahora aparece debajo de la foto del portafolio, sin taparla.
+- Los controles de cantidad de los carritos y los días del calendario conservan el foco al actualizarse; la eliminación de rutinas devuelve el foco al formulario.
+- Dulce Antojo tolera categorías ausentes y productos vacíos dentro de una categoría. TechStore tolera fichas sin especificaciones opcionales.
+- Metadatos de compartir y favicon se actualizan con CONFIG y la dirección de publicación; se eliminó la URL fija del alojamiento anterior.
+
+Se volvieron a comprobar todos los scripts, enlaces locales, archivos de imagen y funciones principales de los cinco proyectos mediante adaptadores DOM. Estos controles no renderizan CSS; continúa pendiente la revisión visual en navegador y dispositivos reales.

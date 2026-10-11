@@ -1,0 +1,35 @@
+CASA CRIOLLA · CARTA DIGITAL
+
+Descomprime el ZIP completo y abre index.html o carta-digital.html.
+Mantén img/ junto a los HTML: abrir el HTML sin sus fotos no muestra imágenes.
+
+Toda la personalización está en const CONFIG de carta-digital.html:
+negocio, teléfono, colores, categorías, platos, precios y textos.
+
+Las 14 imágenes incluidas son originales y fueron generadas con IA:
+logo-casa-criolla.webp
+portada-casa-criolla-v2.webp
+causa-limena.webp
+papa-a-la-huancaina.webp
+lomo-saltado.webp
+aji-de-gallina.webp
+arroz-con-pollo.webp
+tallarines-verdes.webp
+ceviche-de-la-casa.webp
+arroz-con-mariscos.webp
+chicha-morada.webp
+limonada-hierbabuena.webp
+suspiro-a-la-limena.webp
+mazamorra-morada.webp
+
+Para fotos propias, guárdalas en img/ y escribe el nombre exacto en CONFIG.
+foto: "" funciona sin imagen; etiqueta: "" oculta la etiqueta.
+Usa precios numéricos sin escribir S/.
+
+El teléfono de contacto es +51 923 602 215 (CONFIG.whatsapp: 51923602215).
+Cámbialo en CONFIG al adaptar la carta a otro cliente. Las redes son ejemplos.
+WhatsApp necesita conexión a internet.
+
+GUIA-CLIENTES.md explica adaptación y publicación de una demo.
+REVISION-CARTA.txt resume arreglos, pruebas y límites de verificación.
+PROMPTS.txt incluye los prompts de las fotos generadas.

@@ -1,0 +1,56 @@
+/* CONFIG: WhatsApp de contacto: +51 923 602 215.
+   Cambia whatsapp aquí: código de país y celular, solo dígitos, sin +.
+   Personalización: cambia aquí nombre, logo, colores, productos, precios y horarios.
+   Las rutas parten de esta página. Precio y recargos son números en soles.
+   Solo Flat white y Latte de matcha admiten las opciones de leche. */
+const CONFIG={
+  nombre:"Nova Coffee",whatsapp:"51923602215",logo:"../../img/logo-nova-coffee.png",portada:"../../img/nova-portada-v2.webp",portadaAlt:"Café con leche y croissant completos en una cafetería cálida",
+  colores:{fondo:"#FAF3E9",tinta:"#39261E",marca:"#8C4029",sobre:"#FFF9F2"},
+  horas:["09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00"],
+  leches:[{id:"normal",nombre:"Leche entera",recargo:0},{id:"sin-lactosa",nombre:"Sin lactosa",recargo:1.5},{id:"vegetal",nombre:"Bebida vegetal",recargo:2}],
+  productos:[
+    {id:"espresso",nombre:"Espresso",categoria:"Cafés",descripcion:"Corto, intenso y con una crema delicada.",precio:8,foto:"../../img/nova-espresso.webp",etiqueta:"El de siempre"},
+    {id:"flat-white",nombre:"Flat white",categoria:"Cafés",descripcion:"Espresso doble con leche sedosa y un sabor redondo.",precio:12,foto:"../../img/nova-flat-white.webp",etiqueta:"Tu favorito",leche:true},
+    {id:"cold-brew",nombre:"Café de extracción en frío",categoria:"Bebidas frías",descripcion:"Suave y refrescante, servido con hielo.",precio:14,foto:"../../img/nova-cold-brew.webp",etiqueta:"Una pausa fresca"},
+    {id:"matcha",nombre:"Latte de matcha",categoria:"Otras bebidas",descripcion:"Té verde matcha con una textura suave y cremosa.",precio:15,foto:"../../img/nova-matcha.webp",etiqueta:"Algo diferente",leche:true},
+    {id:"croissant",nombre:"Croissant de mantequilla",categoria:"Horneados",descripcion:"Capas doradas, crujientes y recién horneadas.",precio:10,foto:"../../img/nova-croissant.webp",etiqueta:"Recién hecho"},
+    {id:"brownie",nombre:"Brownie de chocolate",categoria:"Horneados",descripcion:"Chocolate intenso, centro húmedo y cubierta delicada.",precio:11,foto:"../../img/nova-brownie.webp",etiqueta:"Un dulce momento"}
+  ]
+};
+(function(){
+  "use strict";
+  const C=DemoCore,X=DemoExtras,$=id=>document.getElementById(id);X.brand(CONFIG);
+  let category="Todos",onlyFavorites=false;const milkChoices=new Map(),favoriteButtons=new Map();
+  const oldFavorites=C.read("nova-favorites-v2",[]);let favorites=new Set(Array.isArray(oldFavorites)?oldFavorites.filter(id=>CONFIG.productos.some(p=>p.id===id)):[]);
+  const catalog=CONFIG.productos.flatMap(p=>p.leche?CONFIG.leches.map(m=>({...p,id:m.id==="normal"?p.id:p.id+"--"+m.id,base:p.id,nombre:p.nombre+" · "+m.nombre,precio:p.precio+m.recargo})): [{...p,base:p.id}]);
+  const cart=new C.Cart("nova-cart-v1",catalog),dialog=X.bindDialog("order-dialog","close-order");
+  let reservations=C.read("nova-reservations-v1",[]);reservations=Array.isArray(reservations)?reservations.filter(r=>r&&typeof r.id==="string"&&typeof r.name==="string"&&C.parseDate(r.date)&&CONFIG.horas.includes(r.time)&&Number.isInteger(r.people)&&r.people>=1&&r.people<=6).slice(-10):[];
+  const categories=["Todos",...new Set(CONFIG.productos.map(p=>p.categoria))];
+  categories.forEach(c=>{const b=C.node("button","tab",c);b.type="button";b.setAttribute("aria-pressed",String(c===category));b.addEventListener("click",()=>{category=c;document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-pressed",String(t===b)));renderMenu();});$("category-tabs").append(b);});
+  function renderMenu(){
+    $("menu").replaceChildren();favoriteButtons.clear();const words=C.normalize($("search").value).split(/\s+/).filter(Boolean);
+    const list=CONFIG.productos.filter(p=>(category==="Todos"||p.categoria===category)&&(!onlyFavorites||favorites.has(p.id))&&words.every(w=>C.normalize(p.nombre+" "+p.descripcion+" "+p.categoria).includes(w)));
+    $("result-count").textContent=list.length+" opciones para tu pausa";$("empty").hidden=!!list.length;
+    list.forEach(p=>{const card=C.node("article","coffee-card"),photo=C.node("div","coffee-image"),body=C.node("div","coffee-body"),fav=C.node("button","iconbtn favorite",favorites.has(p.id)?"♥":"♡");fav.type="button";fav.setAttribute("aria-label","Guardar "+p.nombre+" como favorito");fav.setAttribute("aria-pressed",String(favorites.has(p.id)));
+      fav.addEventListener("click",()=>{favorites.has(p.id)?favorites.delete(p.id):favorites.add(p.id);C.write("nova-favorites-v2",[...favorites]);renderMenu();(favoriteButtons.get(p.id)||$("favorites-only")).focus();X.notify("Favoritos actualizados.");});
+      favoriteButtons.set(p.id,fav);photo.append(X.image(p.foto,p.nombre),fav);body.append(C.node("span","pill",p.etiqueta),C.node("h3","",p.nombre),C.node("p","",p.descripcion));
+      const chosen=milkChoices.get(p.id)||"normal";let selected=p.leche&&chosen!=="normal"?p.id+"--"+chosen:p.id;const price=C.node("strong","coffee-price",C.money(Math.round((catalog.find(v=>v.id===selected)||p).precio*100)));
+      if(p.leche){const label=C.node("label","field","Tipo de leche"),select=C.node("select","milk-select");select.setAttribute("aria-label","Tipo de leche para "+p.nombre);CONFIG.leches.forEach(m=>{const opt=C.node("option","",m.nombre+(m.recargo?" · +"+C.money(Math.round(m.recargo*100)):""));opt.value=m.id;select.append(opt);});select.value=chosen;select.addEventListener("change",()=>{milkChoices.set(p.id,select.value);selected=select.value==="normal"?p.id:p.id+"--"+select.value;const product=catalog.find(v=>v.id===selected);price.textContent=C.money(Math.round(product.precio*100));});label.append(select);body.append(label);}
+      const action=C.node("div","product-action"),add=C.node("button","btn small add-product","Agregar +");add.type="button";add.setAttribute("aria-label","Agregar "+p.nombre+" al pedido");add.addEventListener("click",()=>{if((cart.quantities[selected]||0)>=20){X.notify("Máximo 20 unidades de esta opción.");return;}cart.add(selected);renderCart();X.notify(p.nombre+" añadido a tu pedido.");});action.append(price,add);body.append(action);card.append(photo,body);$("menu").append(card);
+    });
+  }
+  function renderCart(){
+    $("cart-lines").replaceChildren();if(!cart.count())$("cart-lines").append(C.node("p","empty","Elige algo rico y lo guardamos aquí."));
+    cart.lines().forEach(l=>{const row=C.node("div","cart-line"),info=C.node("div"),q=C.node("div","quantity");info.append(C.node("h3","",l.product.nombre),C.node("p","",C.money(l.cents)));[[-1,"−"],[1,"+"]].forEach(([n,text])=>{const b=C.node("button","",text);b.type="button";b.id="cart-"+l.product.id+(n>0?"-plus":"-minus");b.setAttribute("aria-label",(n<0?"Quitar":"Agregar")+" una unidad de "+l.product.nombre);b.disabled=n>0&&l.quantity>=20;b.addEventListener("click",()=>{cart.set(l.product.id,l.quantity+n);renderCart();const next=$("cart-"+l.product.id+(n>0&&cart.quantities[l.product.id]<20?"-plus":"-minus"));(next||$("search")).focus({preventScroll:true});});if(n>0)q.append(C.node("span","",l.quantity));q.append(b);});row.append(info,q);$("cart-lines").append(row);});
+    $("cart-total").textContent=C.money(cart.total());$("bar-total").textContent=C.money(cart.total());$("bar-count").textContent=cart.count()+" productos";$("nav-count").textContent="("+cart.count()+")";$("cart-bar").hidden=!cart.count();$("review-order").disabled=!cart.count();
+  }
+  $("search").addEventListener("input",renderMenu);$("favorites-only").addEventListener("click",function(){onlyFavorites=!onlyFavorites;this.setAttribute("aria-pressed",String(onlyFavorites));renderMenu();});
+  $("review-order").addEventListener("click",function(){if(!cart.count())return;$("order-summary").replaceChildren();cart.lines().forEach(l=>$("order-summary").append(C.node("li","",l.quantity+" × "+l.product.nombre+" · "+C.money(l.cents))));$("order-total").textContent=C.money(cart.total());dialog.open(this);});
+  $("confirm-order").addEventListener("click",()=>{if(!cart.count())return;const id=C.uid("NC"),saved=C.write("nova-last-order-v2",{id,total:cart.total(),note:$("order-note").value.trim(),lines:cart.lines().map(l=>({id:l.product.id,quantity:l.quantity}))});cart.clear();renderCart();dialog.close();$("order-status").hidden=false;$("order-status").textContent="Pedido de prueba "+id+" creado. No se envió a una cafetería."+(saved?"":" No pudo guardarse para otra visita.");$("repeat-order").hidden=!saved;});
+  $("repeat-order").hidden=!C.read("nova-last-order-v2",null);$("repeat-order").addEventListener("click",()=>{const last=C.read("nova-last-order-v2",null);if(last&&Array.isArray(last.lines)){last.lines.forEach(l=>{if(l&&typeof l.id==="string"&&Number.isInteger(l.quantity)&&l.quantity>0)cart.set(l.id,(cart.quantities[l.id]||0)+Math.min(20,l.quantity));});renderCart();X.notify("Último pedido añadido. Puedes cambiarlo antes de confirmar.");}});
+  const today=C.dateKey(new Date());$("reserve-date").min=today;$("reserve-date").value=today;CONFIG.horas.forEach(t=>{const o=C.node("option","",t);o.value=t;$("reserve-time").append(o);});
+  const now=new Date(),clock=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0"),slot=CONFIG.horas.find(t=>t>clock);if(slot)$("reserve-time").value=slot;else{const tomorrow=new Date(now);tomorrow.setDate(tomorrow.getDate()+1);$("reserve-date").value=C.dateKey(tomorrow);}
+  function renderReservations(){$("reserve-history").replaceChildren();if(reservations.length)$("reserve-history").append(C.node("p","eyebrow order-note","Tus reservas de prueba"));reservations.slice().reverse().forEach(r=>{const row=C.node("div","reserve-item"),info=C.node("div"),cancel=C.node("button","remove","Cancelar");info.append(C.node("strong","",r.name),C.node("small","",r.date+" · "+r.time+" · "+r.people+" personas"));cancel.type="button";cancel.setAttribute("aria-label","Cancelar reserva de "+r.name+" del "+r.date);cancel.addEventListener("click",()=>{reservations=reservations.filter(x=>x.id!==r.id);C.write("nova-reservations-v1",reservations);renderReservations();X.notify("Reserva de prueba cancelada.");$("reserve-name").focus();});row.append(info,cancel);$("reserve-history").append(row);});}
+  $("reserve-form").addEventListener("submit",function(e){e.preventDefault();if(!this.checkValidity()){this.reportValidity();return;}const name=$("reserve-name").value.trim(),date=$("reserve-date").value,time=$("reserve-time").value,people=Number($("reserve-people").value),now=new Date();const nowClock=String(now.getHours()).padStart(2,"0")+":"+String(now.getMinutes()).padStart(2,"0");if(name.length<2||!C.parseDate(date)||date<C.dateKey(now)||!CONFIG.horas.includes(time)||date===C.dateKey(now)&&time<=nowClock||!Number.isInteger(people)||people<1||people>6){$("reserve-status").hidden=false;$("reserve-status").textContent="Revisa tus datos y elige una fecha y hora futuras.";return;}reservations.push({id:C.uid("RES"),name,date,time,people});reservations=reservations.slice(-10);const saved=C.write("nova-reservations-v1",reservations);renderReservations();$("reserve-status").hidden=false;$("reserve-status").textContent="Reserva de prueba para "+people+" personas el "+date+" a las "+time+". No se envió a una cafetería."+(saved?"":" No pudo guardarse para otra visita.");});
+  renderMenu();renderCart();renderReservations();
+}());

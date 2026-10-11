@@ -1,0 +1,62 @@
+CASA CRIOLLA — PROMPTS DE LAS IMÁGENES
+
+Método: herramienta integrada de generación de imágenes (imagegen).
+Cada archivo nuevo se generó individualmente como una imagen original.
+Las fotos se incorporan al proyecto sin recortes, conversiones ni retoques.
+El logo-casa-criolla.png y ceviche-de-la-casa.png fueron generados con IA
+previamente para esta misma carta y se reutilizan sin modificarlos.
+
+ARCHIVO: img/portada-casa-criolla.png
+PROMPT:
+Use case: photorealistic-natural. Asset type: hero cover photograph for the digital menu of the fictional Peruvian restaurant Casa Criolla. Create one ORIGINAL photorealistic restaurant food photograph, wide horizontal framing. A welcoming Peruvian meal on a light cream stone table: one generous ceramic plate of authentic lomo saltado with beef strips, red onion, tomato, French fries and a neat mound of white rice, accompanied by a smaller plate of causa limeña and a glass of purple chicha morada. Warm soft natural daylight, earthy deep forest green and terracotta accents from a simple folded napkin, cream ceramic plates, realistic juicy food texture, carefully styled but believable. Composition should have all main dishes centered enough for a cover crop and clear breathing room. No people, no lettering, no logo, no brand, no watermark, no collage. Generate this as a finished photographic website asset.
+
+ARCHIVO: img/causa-limena.png
+PROMPT:
+Use case: product-mockup. Asset type: dish photograph for the Casa Criolla Peruvian restaurant menu. One original photorealistic food photograph of an authentic causa limeña: a neat layered cylinder of smooth yellow potato seasoned with ají amarillo, a visible filling of shredded chicken and mayonnaise and slices of avocado, topped with a small elegant garnish of egg and a black olive. One serving on a simple cream ceramic plate, light cream tabletop, soft natural daylight from the side, realistic appetizing textures, clean pale background with subtle shadows, slightly elevated front three-quarter view, centered full serving with modest breathing room, square composition suitable for a small thumbnail. Cohesive warm cream, fresh green and yellow restaurant food photography. No people, no words, no brands, no logo, no watermark, no collage.
+
+ARCHIVO: img/papa-a-la-huancaina.png
+PROMPT:
+Use case: product-mockup. Asset type: dish photograph for the Casa Criolla Peruvian restaurant menu. Create one original photorealistic food photograph of authentic papa a la huancaína: several thick slices of boiled yellow potatoes generously coated in silky yellow ají amarillo and fresh cheese sauce, served over green lettuce with quartered hard-boiled egg and black olives on a simple cream ceramic plate. Light cream stone tabletop, soft natural side daylight, realistic appetizing sauce and food textures, clean pale background, subtle shadows, slightly elevated front three-quarter view, full plate centered with modest breathing room, square composition suitable for a small thumbnail. No meat, no pasta, no people, no lettering, no known brands, no logo, no watermark, no collage.
+
+ARCHIVO: img/lomo-saltado.png
+PROMPT:
+Use case: product-mockup. Asset type: menu photograph for the fictional Peruvian restaurant Casa Criolla. One original photorealistic food photo of authentic lomo saltado: succulent browned strips of beef sautéed with wedges of red onion and ripe tomato in a glossy soy-based sauce, golden French fries and a neat mound of white rice beside them. One generous serving on a simple cream ceramic plate, pale cream stone table and clean background, soft natural side daylight, realistic beef and vegetable textures, subtly elevated front three-quarter view, entire serving centered with moderate breathing room, square composition for a digital menu thumbnail. Cohesive warm editorial food photography. No people, no lettering, no logo, no known brands, no watermark, no collage.
+
+ARCHIVO: img/aji-de-gallina.png
+PROMPT:
+Use case: product-mockup. Asset type: dish photograph for the Casa Criolla Peruvian restaurant digital menu. Original photorealistic food photo of authentic ají de gallina: shredded chicken in a rich golden yellow ají amarillo sauce with a subtle pecan texture, spooned over slices of boiled potato, a neat mound of white rice beside it, a wedge of hard-boiled egg and one black olive as garnish. One full serving on a simple cream ceramic plate, pale cream tabletop, clean background with soft shadows, warm natural side daylight, appetizing realistic food textures, slightly elevated front three-quarter viewpoint, centered full serving with modest breathing room, square framing. No whole fried chicken, no curry, no words, no people, no brands, no logo, no watermark, no collage.
+
+ARCHIVO: img/arroz-con-pollo.png
+PROMPT:
+Use case: product-mockup. Asset type: dish photo for the Casa Criolla Peruvian restaurant menu. One original photorealistic photograph of authentic Peruvian arroz con pollo: a generous mound of green cilantro rice with peas, small diced carrots and red pepper, a juicy golden-brown chicken thigh or drumstick beside the rice, and a small fresh salsa criolla of thinly sliced red onion. One full meal on a simple cream ceramic plate, pale cream stone tabletop, clean background, soft natural side daylight, warm editorial food styling, realistic separate grains of green rice and chicken texture. Slightly elevated front three-quarter view, center the full serving with breathing room, square composition suitable for a digital menu thumbnail. No people, no words, no brands, no logo, no watermark, no collage.
+
+ARCHIVO: img/tallarines-verdes.png
+PROMPT:
+Use case: product-mockup. Asset type: dish photograph for the fictional Peruvian restaurant Casa Criolla. Create one original photorealistic food photograph of Peruvian tallarines verdes con bistec: a generous nest of spaghetti coated in a creamy green basil, spinach and fresh cheese sauce, accompanied by one juicy grilled beef steak with a lightly browned surface. Fresh green pasta, not raw leaves; a little fine cheese garnish, no tomato sauce. Full serving centered on a simple cream ceramic plate, pale cream stone table, clean pale background, soft natural side daylight and realistic food texture, subtle shadows, slightly elevated front three-quarter view, square framing with modest breathing room, suitable for a small restaurant menu thumbnail. No people, no text, no brands, no logos, no watermark, no collage.
+
+ARCHIVO: img/arroz-con-mariscos.png
+PROMPT:
+Use case: product-mockup. Asset type: dish photo for the Casa Criolla Peruvian restaurant digital menu. One original photorealistic food photograph of authentic Peruvian arroz con mariscos: rich orange-red ají panca rice with clearly visible succulent shrimp, squid rings and mussels, a few green peas and a delicate fresh cilantro garnish, creamy but with distinct rice grains. Full generous serving centered on a simple cream ceramic plate, pale cream stone tabletop and clean pale background, soft natural daylight from the side, warm realistic editorial food photography, subtly elevated front three-quarter viewpoint, modest breathing room, square composition for a menu thumbnail. No meat steak, no oversized lobster, no words, no people, no brands, no logos, no watermark, no collage.
+
+ARCHIVO: img/chicha-morada.png
+PROMPT:
+Use case: product-mockup. Asset type: beverage photograph for the Casa Criolla Peruvian restaurant menu. Create one original photorealistic food-and-drink photograph of a 400 ml glass of homemade Peruvian chicha morada: deep natural purple corn drink in a clear simple tall tumbler with a few realistic ice cubes, a subtle slice of lime beside the glass and a very small piece of purple corn as ingredient context. Clean light cream stone table and pale background, soft natural side daylight, believable condensation and translucent highlights, warm restaurant catalog photography. Front view at glass height with slight elevation, full glass centered and uncropped, square framing with breathing room, ideal for a small menu thumbnail. No bottle, no commercial label, no straw, no cocktail umbrella, no people, no lettering, no logo, no known brand, no watermark, no collage.
+
+ARCHIVO: img/limonada-hierbabuena.png
+PROMPT:
+Use case: product-mockup. Asset type: drink photograph for the Casa Criolla Peruvian restaurant menu. One original photorealistic image of a refreshing 400 ml homemade lemonade with fresh mint: pale cloudy yellow-green fresh-squeezed lime drink in a clear simple tall tumbler, a few ice cubes, a small bright green sprig of mint and a thin lime slice at the rim. A cut lime and only a few fresh mint leaves beside the glass. Light cream stone tabletop, clean pale cream background, soft natural side daylight, realistic condensation and highlights, front view with a slight elevated angle, full glass centered and uncropped with breathing room, square composition for a small menu thumbnail. Appetizing cohesive warm catalog food photography. No bottle, no commercial label, no people, no words, no logos, no watermark, no collage.
+
+ARCHIVO: img/suspiro-a-la-limena.png
+PROMPT:
+Use case: product-mockup. Asset type: dessert photograph for the Casa Criolla Peruvian restaurant menu. Create one original photorealistic photo of authentic suspiro a la limeña: a small clear glass dessert cup with a visibly thick glossy caramel-colored manjar blanco base and airy white meringue piped on top into delicate peaks, with a light dusting of cinnamon. The cream and meringue layers clearly visible through the glass. One elegant serving centered on a small cream ceramic saucer on a pale cream stone tabletop, soft natural side daylight, clean background and subtle shadows, warm appetizing editorial food photography, realistic soft textures, slightly elevated front three-quarter view, square framing with modest breathing room. No cake, no red fruit, no chocolate mousse, no people, no words, no brands, no logo, no watermark, no collage.
+
+ARCHIVO: img/mazamorra-morada.png
+PROMPT:
+Use case: product-mockup. Asset type: dessert photograph for the Casa Criolla Peruvian restaurant menu. One original photorealistic photograph of authentic Peruvian mazamorra morada: a small simple clear glass bowl of thick glossy deep purple corn pudding with some visible small pineapple fruit pieces and prune pieces integrated into the pudding, a delicate cinnamon dusting on top. It is a spoonable pudding, not a drink, not jelly cubes, not rice pudding. One serving centered on a small cream saucer, pale cream stone tabletop and clean light background, soft warm natural side daylight, true food textures and believable soft shadows, slightly elevated front three-quarter viewpoint, square frame with modest breathing room, suitable for a small digital menu thumbnail. No people, no words, no branding, no logo, no watermark, no collage.
+
+
+PORTADA NUEVA DE CASA CRIOLLA · VERSIÓN 2
+Herramienta: generación de imágenes integrada, sin CLI ni imágenes de internet.
+Archivo final: proyectos/casa-criolla/img/portada-casa-criolla-v2.webp
+Prompt: fotografía editorial gastronómica realista horizontal 3:2. Sobre mesa de piedra beige clara, plato cerámico completo de lomo saltado peruano con res, cebolla morada, tomate, papas fritas y arroz blanco; detrás, causa limeña pequeña y vaso de chicha morada. Vista de tres cuartos, luz natural suave de ventana, vajilla artesanal y servilleta terracota. Tonos marfil, verde salvia y terracota. Todos los platos y el vaso completos dentro del encuadre, con margen alrededor. Sin personas, textos, marcas, logos, dibujos ni estilo ilustración. Una foto, sin collage.
+Optimización: WebP calidad 90, conservando las dimensiones 1536 x 1024 y el encuadre. Reemplaza la portada previa. La ilustración SVG de comida fue eliminada del código.
