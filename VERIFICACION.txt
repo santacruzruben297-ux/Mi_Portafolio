@@ -39,3 +39,13 @@ CV ACTUALIZADO E INTEGRADO
 - Nueve enlaces activos en el PDF: correo, WhatsApp, portafolio, LinkedIn y las cinco demos.
 - Botón "Descargar CV (PDF)" generado desde CONFIG.perfil.cv, con nombre de archivo y etiqueta accesible.
 - Comprobados el PDF válido, texto seleccionable, enlaces, ruta local y funcionamiento del botón mediante el adaptador DOM. La página del PDF se renderizó y revisó visualmente para descartar cortes y superposiciones.
+
+OFERTA Y PÚBLICO OBJETIVO
+
+- Presentación dirigida a barberías, restaurantes y emprendedores de Instagram.
+- Landing page desde S/50: hasta cinco secciones, diseño para celular y PC, WhatsApp y redes, una ronda de ajustes y enlace publicado.
+- Plazo anunciado de tres días desde recibir textos, fotos y datos del negocio. El dominio propio y las funciones adicionales se cotizan aparte.
+- El inicio y Servicios leen la misma oferta de CONFIG.servicios. La llamada principal abre WhatsApp al número de Rubén con el mensaje de ese servicio.
+- Comprobadas sintaxis JavaScript, referencias a elementos HTML, rutas locales y archivos del paquete. Los proyectos siguen siendo demos ficticias.
+
+La revisión visual en un navegador y en dispositivos reales sigue pendiente.

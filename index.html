@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="Rubén Santa Cruz: diseño web y UI/UX en Perú. Explora cartas digitales, catálogos y aplicaciones con demos funcionales.">
+  <meta name="description" content="Páginas para barberías, restaurantes y emprendedores de Instagram. Landing page desde S/50, lista en 3 días desde recibir tu contenido. Rubén Santa Cruz, Perú.">
   <meta name="theme-color" content="#F8F7F2">
   <meta property="og:title" content="Rubén Santa Cruz · Diseño web y UI/UX">
-  <meta property="og:description" content="Diseño que se ve. Web que funciona. Cinco proyectos para explorar y probar.">
+  <meta property="og:description" content="Páginas para barberías, restaurantes y emprendedores de Instagram. Landing page desde S/50, lista en 3 días desde recibir tu contenido.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="img/estudio-diseno.webp">
   <meta property="og:url" content="">
@@ -60,6 +60,15 @@
     .hero h1 em { color:var(--brand); font-weight:400; }
     .hero-description { margin-top:23px; max-width:430px; color:var(--muted); font-size:15px; line-height:1.85; }
     .hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:11px; margin-top:28px; }
+    /* La oferta toma el precio y el plazo del servicio destacado en CONFIG. */
+    .hero-offer { margin-top:23px; max-width:430px; padding:17px 18px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+    .hero-offer h2 { font-size:13px; font-weight:650; line-height:1.45; }
+    .offer-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px 16px; margin-top:9px; }
+    .offer-price { font:400 29px/1.2 Georgia,"Times New Roman",serif; color:var(--brand); }
+    .offer-deadline { padding:5px 9px; border-radius:6px; background:var(--soft); color:var(--ink); font-size:11px; font-weight:650; }
+    .offer-summary { margin-top:10px; font-size:12px; line-height:1.6; color:var(--ink); }
+    .offer-conditions { display:block; margin-top:6px; font-size:11px; line-height:1.6; color:var(--muted); }
+    .service-terms { margin-top:12px; font-size:11px!important; line-height:1.65; }
     .button { display:inline-flex; align-items:center; justify-content:center; gap:15px; min-height:48px; padding:13px 22px; border-radius:9px; border:1px solid transparent; font-size:12px; font-weight:650; background:var(--ink); color:var(--paper); transition:transform .18s,background .18s; }
     .button:hover { transform:translateY(-2px); }
     .button-outline { background:transparent; color:var(--ink); border-color:var(--line); }
@@ -129,9 +138,9 @@
     .service p { color:var(--muted); font-size:12px; max-width:430px; line-height:1.8; }
     .service-includes { display:flex; flex-wrap:wrap; gap:7px 16px; margin-top:14px; color:var(--muted); font-size:10px; }
     .service-includes span::before { content:"↗"; color:var(--brand); margin-right:6px; }
-    .service-action { display:flex; align-items:center; gap:18px; justify-content:space-between; }
+    .service-action { display:flex; flex-wrap:wrap; align-items:center; gap:18px; justify-content:space-between; }
     .service-price { font-size:13px; font-weight:650; }
-    .service-price small { display:block; font-size:9px; font-weight:450; color:var(--muted); }
+    .service-price small { display:block; max-width:270px; font-size:11px; line-height:1.65; font-weight:450; color:var(--muted); }
     .contact-section { padding-block:55px 40px; }
     .contact-panel { background:#24372b; color:#f8f7f2; padding:31px 23px; border-radius:20px; }
     .contact-panel :focus-visible { outline-color:#d7e5a8; }
@@ -267,10 +276,11 @@
       <div class="hero-topline"><span id="hero-role">Diseñador independiente · Perú</span><span class="availability" id="availability">Disponible para proyectos freelance</span></div>
       <div class="hero-grid">
         <div class="reveal">
-          <h1><span id="hero-line1">Diseño que se ve.</span><em id="hero-line2">Web que funciona.</em></h1>
-          <p class="hero-description" id="hero-description">Soy Rubén. Diseño interfaces y páginas web con identidad propia, para que tu negocio se entienda y tus clientes encuentren lo que buscan.</p>
-          <div class="hero-actions"><a class="button" href="#portafolio">Explorar proyectos <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a class="button button-outline" href="#contacto">Cuéntame tu idea</a></div>
-          <p class="hero-note" id="hero-note">UI/UX, diseño y desarrollo. De la idea a la web.</p>
+           <h1><span id="hero-line1">Tu negocio,</span><em id="hero-line2">a un clic.</em></h1>
+           <p class="hero-description" id="hero-description">Páginas para barberías, restaurantes y emprendedores de Instagram. Presenta lo que ofreces y recibe consultas por WhatsApp.</p>
+           <div class="hero-offer" id="hero-offer" hidden></div>
+           <div class="hero-actions"><a class="button" id="hero-wa" href="#contacto">Quiero mi página</a><a class="button button-outline" href="#portafolio">Ver ejemplos <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+           <p class="hero-note" id="hero-note">Con tu logo, tus fotos y tus datos de contacto.</p>
         </div>
         <figure class="hero-figure reveal">
           <div class="hero-image"><img id="hero-image" src="img/estudio-diseno.webp" alt="Composición creativa con bocetos, paleta de colores y herramientas de diseño" width="1536" height="1024" fetchpriority="high" decoding="async"></div>
@@ -295,7 +305,7 @@
     </section>
     <section class="section wrap" id="servicios" aria-labelledby="services-title">
       <p class="section-label"><span>03 /</span> Servicios</p>
-      <div class="section-head"><h2 class="section-title" id="services-title">Hagamos que tu<br>negocio se vea bien.</h2><p class="section-lead">Soluciones claras para negocios pequeños, marcas personales y proyectos que están empezando.</p></div>
+       <div class="section-head"><h2 class="section-title" id="services-title">Hagamos que tu<br>negocio se vea bien.</h2><p class="section-lead" id="services-intro">Para tu barbería, restaurante o tienda de Instagram: una página clara y fácil de compartir.</p></div>
       <div class="services" id="services"></div>
     </section>
     <section class="contact-section wrap" id="contacto" aria-labelledby="contact-title">
@@ -332,10 +342,11 @@
         profesion: "Diseño web & UI/UX",
         ubicacion: "Perú",
         disponibilidad: "Disponible para proyectos freelance",
-        titulo: "Diseño que se ve.",
-        tituloDestacado: "Web que funciona.",
-        descripcion: "Soy Rubén. Diseño interfaces y páginas web con identidad propia, para que tu negocio se entienda y tus clientes encuentren lo que buscan.",
-        nota: "UI/UX, diseño y desarrollo. De la idea a la web.",
+        titulo: "Tu negocio,",
+        tituloDestacado: "a un clic.",
+        descripcion: "Páginas para barberías, restaurantes y emprendedores de Instagram. Presenta lo que ofreces y recibe consultas por WhatsApp.",
+        nota: "Con tu logo, tus fotos y tus datos de contacto.",
+        serviciosIntro: "Para tu barbería, restaurante o tienda de Instagram: una página clara y fácil de compartir.",
         foto: "img/estudio-diseno.webp",
         fotoAlt: "Composición creativa con bocetos, paleta de colores y herramientas de diseño",
         // WhatsApp: código del país y número, sin +, espacios ni guiones.
@@ -364,7 +375,20 @@
         { titulo:"Desarrollar y revisar", descripcion:"Conecto las interacciones, reviso enlaces y preparo los archivos para publicar y actualizar." }
       ],
       // Edita servicios, precio visible, prestaciones y mensaje de contacto.
+      // destacado:true muestra la oferta también en el inicio. Marca solo una.
+      // precio, plazo, detalle y condiciones definen el alcance que anuncias.
       servicios: [
+        {
+          titulo:"Landing page para tu negocio", destacado:true,
+          descripcion:"Una página para presentar tu barbería, restaurante o tienda de Instagram. Tus servicios o productos, horarios y contacto en un solo enlace.",
+          incluye:["Hasta 5 secciones","Diseño para celular y PC","WhatsApp y redes sociales","1 ronda de ajustes","Enlace publicado para compartir"],
+          precio:"Desde S/50", plazo:"Lista en 3 días",
+          resumen:"Una página, WhatsApp y publicación incluida.",
+          detalle:"Desde recibir tus textos, fotos y datos del negocio.",
+          condiciones:"El precio base cubre este alcance. Dominio propio y funciones adicionales se cotizan aparte.",
+          cta:"Quiero mi página",
+          mensaje:"Hola Rubén, me interesa la landing page desde S/50, lista en 3 días. Quisiera conversar sobre mi negocio."
+        },
         { titulo:"Cartas y catálogos digitales", descripcion:"Tu menú o tus productos en una web que tus clientes pueden abrir y compartir. Pedidos por WhatsApp y contenido personalizable.", incluye:["Diseño para celular","Fotos y categorías","Pedidos por WhatsApp"], precio:"S/50", detalle:"Carta digital", mensaje:"Hola Rubén, me interesa una carta digital por S/50 para mi negocio." },
         { titulo:"Diseño y desarrollo web", descripcion:"Una página para presentar tu negocio o marca personal, con una estructura clara y un contacto fácil de encontrar.", incluye:["Web adaptable","Contenido organizado","Contacto directo"], precio:"A medida", detalle:"Según tu proyecto", mensaje:"Hola Rubén, quisiera cotizar una página web para mi negocio." },
         { titulo:"UI/UX e identidad visual", descripcion:"Interfaces, paletas y elementos visuales que ayudan a que una marca se reconozca y un producto se entienda.", incluye:["Flujos y prototipos","Estilo visual","Diseño de interfaces"], precio:"Conversemos", detalle:"Definamos el alcance", mensaje:"Hola Rubén, me gustaría conversar sobre diseño UI/UX e identidad visual." }
@@ -484,6 +508,7 @@
       set("hero-role","Diseñador independiente · "+profile.ubicacion);
       set("availability",profile.disponibilidad);set("hero-line1",profile.titulo);set("hero-line2",profile.tituloDestacado);
       set("hero-description",profile.descripcion);set("hero-note",profile.nota);
+      set("services-intro",profile.serviciosIntro);
       $("hero-image").src=safeURL(profile.foto,true);$("hero-image").alt=profile.fotoAlt;
       $("hero-image").addEventListener("error",function(){this.hidden=true;});
       doc.title=profile.nombre+" · "+profile.profesion;
@@ -496,6 +521,21 @@
       const favicon=doc.querySelector('link[rel="icon"]');if(favicon&&safeURL(profile.logo,true))favicon.href=safeURL(profile.logo,true);
       set("footer-name",profile.nombre);set("year",new Date().getFullYear());
       const general=wa(profile.mensajeWhatsapp);
+      // La oferta del inicio y Servicios comparten los mismos datos de CONFIG.
+      const offer=CONFIG.servicios.find(function(s){return s.destacado;});
+      const heroAction=$("hero-wa");
+      heroAction.href=wa(offer?offer.mensaje:profile.mensajeWhatsapp);
+      heroAction.target="_blank";heroAction.rel="noopener noreferrer";
+      if(offer){
+        const box=$("hero-offer");box.hidden=false;
+        box.append(el("h2","",offer.titulo));
+        const row=el("div","offer-row");row.append(el("strong","offer-price",offer.precio));
+        if(offer.plazo)row.append(el("span","offer-deadline",offer.plazo));
+        box.append(row);
+        if(offer.resumen)box.append(el("p","offer-summary",offer.resumen));
+        if(offer.detalle)box.append(el("small","offer-conditions",offer.detalle));
+        if(offer.cta)heroAction.textContent=offer.cta;
+      }
       $("contact-wa").href=general;$("float-wa").href=general;$("float-wa").setAttribute("aria-label","Contactar a "+profile.nombre+" por WhatsApp");
       $("contact-email").textContent=profile.email;$("contact-email").href="mailto:"+profile.email;
       (profile.redes||[]).forEach(function(s){const url=safeURL(s.url);if(url)$("socials").append(external(url,"",s.nombre+" ↗"));});
@@ -513,7 +553,8 @@
       CONFIG.servicios.forEach(function(s,i){
         const row=el("article","service");row.append(el("span","service-index",String(i+1).padStart(2,"0")));
         const info=el("div");info.append(el("h3","",s.titulo),el("p","",s.descripcion));const includes=el("div","service-includes");s.incluye.forEach(function(x){includes.append(el("span","",x));});info.append(includes);
-        const action=el("div","service-action");const price=el("div","service-price",s.precio);price.append(el("small","",s.detalle));action.append(price,external(wa(s.mensaje),"project-link","Me interesa ↗"));row.append(info,action);$("services").append(row);
+        if(s.condiciones)info.append(el("p","service-terms",s.condiciones));
+        const action=el("div","service-action");const price=el("div","service-price",s.precio);price.append(el("small","",(s.plazo?s.plazo+" · ":"")+s.detalle));action.append(price,external(wa(s.mensaje),"project-link",s.cta||"Me interesa ↗"));row.append(info,action);$("services").append(row);
       });
       const projects=CONFIG.proyectos.filter(function(p){return p&&safeURL(p.enlace,true);});
       set("project-total",projects.length+" proyectos para explorar.");

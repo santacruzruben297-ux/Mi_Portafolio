@@ -5,6 +5,7 @@ Abre `index.html` o publica el contenido de esta carpeta en un alojamiento de si
 ## Qué incluye
 
 - Portafolio con tu logo original, cinco proyectos, filtros, casos, tema oscuro y contacto por WhatsApp o correo.
+- Oferta de landing page desde S/50, lista en 3 días desde recibir el contenido del cliente, visible en el inicio y en Servicios. Incluye hasta cinco secciones, diseño adaptable, WhatsApp y redes, una ronda de ajustes y publicación.
 - Casa Criolla: 12 platos, 5 categorías, búsqueda y pedidos por WhatsApp.
 - Dulce Antojo: 16 productos, 4 categorías y variantes con precios y mensajes de pedido.
 - Nova Coffee: identidad cálida, 6 productos, favoritos, tipos de leche con recargos, notas, repetición del último pedido y reservas cancelables.
@@ -22,7 +23,11 @@ Abre `index.html` o publica el contenido de esta carpeta en un alojamiento de si
 | TechStore | `proyectos/techstore/app.js`, al inicio |
 | FitLife | `proyectos/fitlife-app/app.js`, al inicio |
 
-Edita los nombres, logos, portadas, colores y datos disponibles en cada CONFIG. Los precios se escriben como números en soles, sin `S/`. Los comentarios del código están en español. Las rutas de las demos se interpretan desde su `index.html`, por eso las imágenes comunes empiezan por `../../img/`.
+Edita los nombres, logos, portadas, colores y datos disponibles en cada CONFIG. En las demos, los precios se escriben como números en soles, sin `S/`. En los servicios del portafolio, `precio` es el texto visible, por ejemplo `"Desde S/50"`. Los comentarios del código están en español. Las rutas de las demos se interpretan desde su `index.html`, por eso las imágenes comunes empiezan por `../../img/`.
+
+La oferta del inicio sale del primer servicio con `destacado: true` en `CONFIG.servicios`. Marca solo uno. Cambia allí `titulo`, `precio`, `plazo`, `detalle`, `resumen`, `incluye`, `condiciones`, `cta` y `mensaje`; el inicio y Servicios leen el mismo objeto. El plazo base cuenta desde recibir textos, fotos y datos del negocio; dominio propio y funciones adicionales se cotizan aparte. El público objetivo se cambia en `CONFIG.perfil.descripcion` y `CONFIG.perfil.serviciosIntro`.
+
+Los cinco proyectos siguen identificados como conceptos y demos. No se han añadido clientes, resultados ni testimonios inventados. Cuando tengas un trabajo real, prepara su descripción, enlace, imágenes y resultados comprobables para incorporarlo como caso real.
 
 El CV está integrado en `documents/CV-Ruben-Santa-Cruz.pdf`, con los cinco proyectos actuales y los datos del documento anterior. El botón "Descargar CV (PDF)" aparece en "Sobre mí" y su ruta se cambia desde `CONFIG.perfil.cv`. Para actualizarlo, reemplaza el PDF manteniendo el nombre; si lo renombras, cambia también esa ruta. Deja el campo vacío para ocultar el botón.
 
