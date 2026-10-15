@@ -10,7 +10,7 @@ Catálogo de 14 soluciones correspondientes a los casos de `Funciones_v2.pdf`, c
 
 ## Enlaces de entrega
 
-- Aplicación: https://santacruzruben297-ux.github.io/Mi_Portafolio/proyectos/laboratorio-php/
+- Aplicación: https://laboratorio-php-ruben.stonysnail3.chatgpt.site
 - Código fuente: https://github.com/santacruzruben297-ux/Mi_Portafolio/tree/proyecto-php-2026/proyectos/laboratorio-php
 
 ## Ejecutar en PHP convencional
