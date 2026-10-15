@@ -1,0 +1,4 @@
+This site uses PHP.wasm 3.1.58 by WordPress contributors (GPL-2.0-or-later).
+Source: https://github.com/WordPress/wordpress-playground
+PHP 8.3: https://www.php.net/license/3_01.txt
+Bootstrap 5.3.3 and Prism 1.29.0: MIT license.

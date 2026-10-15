@@ -1,0 +1,302 @@
+[
+  {
+    "id": "1a",
+    "label": "1A",
+    "title": "Elevar al cuadrado",
+    "category": "Fundamentos",
+    "statement": "Ingresar un número entero y crear una función que devuelva su cuadrado. Utilizar un formulario y comprobar el envío con isset.",
+    "page": 11,
+    "fields": [
+      {
+        "name": "n",
+        "label": "Número entero",
+        "type": "number",
+        "value": "5",
+        "min": "-1000000",
+        "max": "1000000",
+        "step": "1"
+      }
+    ],
+    "sample": "5² = 25",
+    "concept": "Funciones con retorno"
+  },
+  {
+    "id": "1b",
+    "label": "1B",
+    "title": "Producto de dos enteros",
+    "category": "Fundamentos",
+    "statement": "Ingresar dos números enteros y crear una función que devuelva su producto. Presentar el resultado en el formulario.",
+    "page": 11,
+    "fields": [
+      {
+        "name": "a",
+        "label": "Primer entero",
+        "type": "number",
+        "value": "6",
+        "min": "-1000000",
+        "max": "1000000",
+        "step": "1"
+      },
+      {
+        "name": "b",
+        "label": "Segundo entero",
+        "type": "number",
+        "value": "7",
+        "min": "-1000000",
+        "max": "1000000",
+        "step": "1"
+      }
+    ],
+    "sample": "6 × 7 = 42",
+    "concept": "Parámetros y retorno"
+  },
+  {
+    "id": "2",
+    "label": "2",
+    "title": "Área de un cuadrado",
+    "category": "Geometría",
+    "statement": "Crear una función que reciba la longitud del lado de un cuadrado y retorne su superficie. Capturar el lado mediante un formulario.",
+    "page": 13,
+    "fields": [
+      {
+        "name": "lado",
+        "label": "Lado (m)",
+        "type": "number",
+        "value": "10",
+        "min": "0.01",
+        "max": "1000000",
+        "step": "any"
+      }
+    ],
+    "sample": "10 m × 10 m = 100.00 m²",
+    "concept": "Superficie = lado × lado"
+  },
+  {
+    "id": "3",
+    "label": "3",
+    "title": "Un saludo sin retorno",
+    "category": "Fundamentos",
+    "statement": "Demostrar una función que no retorna un valor y realiza una acción. Esta solución imprime un saludo personalizado mediante una función void.",
+    "page": 14,
+    "fields": [
+      {
+        "name": "nombre",
+        "label": "Tu nombre",
+        "type": "text",
+        "value": "Rubén",
+        "min": "",
+        "max": "",
+        "step": ""
+      }
+    ],
+    "sample": "Una función void imprime el saludo.",
+    "concept": "Funciones sin retorno"
+  },
+  {
+    "id": "4",
+    "label": "4",
+    "title": "Nota y mensaje",
+    "category": "Fundamentos",
+    "statement": "Generar aleatoriamente una nota de 0 a 20 con rand(). Si la nota es mayor o igual a 13, una función mostrará «Felicitaciones»; de lo contrario, mostrará «Inténtalo en otra oportunidad!!!».",
+    "page": 15,
+    "fields": [],
+    "sample": "De 0 a 20 · aprobación desde 13",
+    "concept": "rand() y condicionales"
+  },
+  {
+    "id": "5",
+    "label": "5",
+    "title": "Suma con biblioteca externa",
+    "category": "Modularidad",
+    "statement": "Crear una función que sume dos enteros en el archivo externo libfunciones.php. Incorporar la biblioteca mediante include y utilizarla desde un formulario.",
+    "page": 20,
+    "fields": [
+      {
+        "name": "a",
+        "label": "Primer entero",
+        "type": "number",
+        "value": "15",
+        "min": "-1000000",
+        "max": "1000000",
+        "step": "1"
+      },
+      {
+        "name": "b",
+        "label": "Segundo entero",
+        "type": "number",
+        "value": "20",
+        "min": "-1000000",
+        "max": "1000000",
+        "step": "1"
+      }
+    ],
+    "sample": "15 + 20 = 35",
+    "concept": "include + libfunciones.php"
+  },
+  {
+    "id": "6a",
+    "label": "6A",
+    "title": "Calculadora de IGV",
+    "category": "Modularidad",
+    "statement": "Crear calculos.php con la función calcularIgv(float $monto): float, que retorna el 18 % de un monto. Incorporarla mediante require_once y mostrar subtotal, IGV y total en un formulario.",
+    "page": 21,
+    "fields": [
+      {
+        "name": "monto",
+        "label": "Subtotal (S/)",
+        "type": "number",
+        "value": "100",
+        "min": "0",
+        "max": "1000000",
+        "step": "0.01"
+      }
+    ],
+    "sample": "S/ 100.00 + S/ 18.00 = S/ 118.00",
+    "concept": "require_once + calculos.php"
+  },
+  {
+    "id": "6b",
+    "label": "6B",
+    "title": "Factorial recursivo",
+    "category": "Recursividad",
+    "statement": "Leer un entero no negativo y calcular su factorial mediante una función recursiva. La guía también denomina «Caso 6» a este ejercicio; aquí se identifica como 6B para conservar ambos casos.",
+    "page": 23,
+    "fields": [
+      {
+        "name": "n",
+        "label": "Entero de 0 a 20",
+        "type": "number",
+        "value": "5",
+        "min": "0",
+        "max": "20",
+        "step": "1"
+      }
+    ],
+    "sample": "5! = 120 · 0! = 1",
+    "concept": "Caso base + llamada recursiva"
+  },
+  {
+    "id": "7",
+    "label": "7",
+    "title": "Código de ticket",
+    "category": "Cadenas",
+    "statement": "Ingresar la categoría de un producto y un código secundario. Limpiar los espacios iniciales de la categoría con ltrim(), los finales del código con rtrim(), convertir la categoría a mayúsculas con strtoupper() y unificar el código.",
+    "page": 28,
+    "fields": [
+      {
+        "name": "categoria",
+        "label": "Categoría",
+        "type": "text",
+        "value": "  bebidas",
+        "min": "",
+        "max": "",
+        "step": ""
+      },
+      {
+        "name": "codigo",
+        "label": "Código secundario",
+        "type": "text",
+        "value": "A012  ",
+        "min": "",
+        "max": "",
+        "step": ""
+      }
+    ],
+    "sample": "  bebidas + A012   → BEBIDAS-A012",
+    "concept": "ltrim() · rtrim() · strtoupper()"
+  },
+  {
+    "id": "8",
+    "label": "8",
+    "title": "Normalizar un nombre",
+    "category": "Cadenas",
+    "statement": "Leer un nombre completo, limpiar los espacios innecesarios, convertirlo a minúsculas y colocar en mayúscula la primera letra de cada palabra. Utilizar trim(), strtolower() y ucwords().",
+    "page": 29,
+    "fields": [
+      {
+        "name": "nombre",
+        "label": "Nombre completo",
+        "type": "text",
+        "value": "  RUBÉN   SANTACRUZ quispe  ",
+        "min": "",
+        "max": "",
+        "step": ""
+      }
+    ],
+    "sample": "  RUBÉN   SANTACRUZ quispe → Rubén Santacruz Quispe",
+    "concept": "trim() · strtolower() · ucwords()"
+  },
+  {
+    "id": "9",
+    "label": "9",
+    "title": "Área de un círculo",
+    "category": "Geometría",
+    "statement": "Calcular el área de un círculo a partir de su radio usando pi() y pow(). Mostrar el resultado con dos decimales mediante number_format().",
+    "page": 34,
+    "fields": [
+      {
+        "name": "radio",
+        "label": "Radio (m)",
+        "type": "number",
+        "value": "3",
+        "min": "0.01",
+        "max": "1000000",
+        "step": "any"
+      }
+    ],
+    "sample": "π × 3² = 28.27 m²",
+    "concept": "pi() · pow() · number_format()"
+  },
+  {
+    "id": "10",
+    "label": "10",
+    "title": "Hipotenusa de un triángulo",
+    "category": "Geometría",
+    "statement": "Ingresar los dos catetos de un triángulo rectángulo y calcular la hipotenusa con sqrt() y pow(). Mostrar el resultado con dos decimales.",
+    "page": 35,
+    "fields": [
+      {
+        "name": "a",
+        "label": "Cateto A (m)",
+        "type": "number",
+        "value": "3",
+        "min": "0.01",
+        "max": "1000000",
+        "step": "any"
+      },
+      {
+        "name": "b",
+        "label": "Cateto B (m)",
+        "type": "number",
+        "value": "4",
+        "min": "0.01",
+        "max": "1000000",
+        "step": "any"
+      }
+    ],
+    "sample": "√(3² + 4²) = 5.00 m",
+    "concept": "Teorema de Pitágoras"
+  },
+  {
+    "id": "11",
+    "label": "11",
+    "title": "Fecha y hora en Lima",
+    "category": "Fecha y hora",
+    "statement": "Establecer la zona horaria America/Lima. Obtener la marca de tiempo actual con time() y mostrar la fecha en formato d/m/Y y la hora en formato h:i:s A con date().",
+    "page": 41,
+    "fields": [],
+    "sample": "America/Lima · fecha, hora y timestamp",
+    "concept": "time() · date() · zona horaria"
+  },
+  {
+    "id": "12",
+    "label": "12",
+    "title": "Lima y Nueva York",
+    "category": "Fecha y hora",
+    "statement": "Mostrar la hora actual en Lima y Nueva York cambiando dinámicamente la zona horaria con date_default_timezone_set(). Presentar los formatos de 24 horas (H:i:s) y 12 horas (h:i:s a).",
+    "page": 42,
+    "fields": [],
+    "sample": "Dos ciudades · un mismo instante",
+    "concept": "Zonas horarias y horario estacional"
+  }
+]
