@@ -1,0 +1,18 @@
+<?php
+require_once __DIR__.'/config/app.php';
+require_once __DIR__.'/lib/casos.php';
+// Módulo financiero disponible también desde el punto de entrada.
+require_once __DIR__.'/lib/calculos.php';
+$casos = catalogo();
+$categorias = array_values(array_unique(array_column($casos, 'category')));
+$pageTitle = 'Catálogo de casos';
+include_once __DIR__.'/includes/header.php';
+?>
+<section class="hero"><div class="hero-copy"><div class="eyebrow">PROYECTO DE DESARROLLO · 2026-II</div><h1>Una idea.<br>Una función.<br><em>Una solución.</em></h1><p>Explora los casos, entiende el código y pon a prueba cada solución con tus propios datos.</p><a class="btn btn-primary" href="#catalogo">Explorar los 14 casos <span>↗</span></a></div><div class="hero-terminal" aria-label="Ejemplo de una función PHP"><div class="terminal-title"><span class="dots">● ● ●</span> funciones.php <span>PHP 8</span></div><div class="terminal-code"><span class="muted-code">01</span> <span class="pink">&lt;?php</span><br><span class="muted-code">02</span> <span class="purple">function</span> <span class="yellow">aprender</span>(<span class="blue">$caso</span>) {<br><span class="muted-code">03</span> &nbsp; <span class="purple">return</span> <span class="green">'Práctica + código'</span>;<br><span class="muted-code">04</span> }<br><span class="muted-code">05</span><br><span class="muted-code">06</span> <span class="comment">// De la teoría a la ejecución.</span></div><div class="terminal-foot"><span class="status-dot"></span> Preparado para experimentar</div><div class="hero-stat"><strong>14</strong><span>casos<br>resueltos</span><b>6</b><span>categorías<br>de aprendizaje</span></div></div></section>
+<section class="student-strip" aria-label="Datos del estudiante"><div><span>DESARROLLADO POR</span><strong><?= e(STUDENT) ?></strong></div><div><span>CURSO</span><strong>Programación Web</strong></div><div><span>SEMESTRE / TURNO</span><strong>IV · Tarde</strong></div><div><span>INSTITUCIÓN</span><strong>Misioneros Monfortianos</strong></div></section>
+<section id="catalogo" class="catalog"><div class="section-head"><div><div class="eyebrow">APRENDE HACIENDO</div><h2>Catálogo de ejercicios</h2></div><label class="search"><span class="visually-hidden">Buscar casos</span><input id="buscar" type="search" placeholder="Buscar un caso o concepto…" class="form-control" aria-label="Buscar un caso o concepto"></label></div>
+<div class="filters" aria-label="Filtrar por categoría"><button class="filter active" data-category="Todos" aria-pressed="true">Todos <span>14</span></button><?php foreach ($categorias as $categoria): ?><button class="filter" data-category="<?= e($categoria) ?>" aria-pressed="false"><?= e($categoria) ?></button><?php endforeach ?></div>
+<p class="results-count" id="conteo" aria-live="polite">14 casos disponibles · selecciona uno para comenzar</p><div class="case-grid">
+<?php foreach ($casos as $caso): ?><article class="case-card" data-category="<?= e($caso['category']) ?>" data-search="<?= e($caso['title'].' '.$caso['concept'].' '.$caso['category']) ?>"><div class="card-top"><span class="case-number"><?= e($caso['label']) ?></span><span class="category"><?= e($caso['category']) ?></span></div><h3><a href="caso<?= e($caso['id']) ?>.php"><?= e($caso['title']) ?></a></h3><p><?= e($caso['statement']) ?></p><div class="card-bottom"><code><?= e($caso['concept']) ?></code><a href="caso<?= e($caso['id']) ?>.php" class="open-case" aria-label="Abrir caso <?= e($caso['label']) ?>">↗</a></div></article><?php endforeach ?>
+</div><p id="sin-resultados" class="empty-state" hidden>No hay casos con ese filtro. Prueba otra palabra o selecciona «Todos».</p>
+<?php include_once __DIR__.'/includes/footer.php'; ?>
